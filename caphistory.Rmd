@@ -26,11 +26,11 @@ cap.y <- cap[,c("c1", "c2", "c3", "c4" , "c5", "c6", "c7", "c8", "c9", "c10", "c
 
 ```{r}
 mod=crm(cap,model="JS",groups="Sex",model.parameters=list(Phi=list(formula=~Sex),p=list(formula=~code)))
-mod$results$beta
+mod$results$beta #found online but not sure how to use it
 ```
 
 ```{r}
-Model.1 = mark(hw.proc,hw.ddl,model.parameters=list(Phi=Phi.ct,p=p.ct),output = FALSE,delete=T)
+Model.1 = mark(hw.proc,hw.ddl,model.parameters=list(Phi=Phi.ct,p=p.ct),output = FALSE,delete=T) #found online as well but don't know how to use it
 ```
 
 
