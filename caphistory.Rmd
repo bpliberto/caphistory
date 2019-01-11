@@ -4,7 +4,7 @@ author: "Bethany Liberto"
 date: "January 10, 2019"
 output: word_document
 ---
-
+Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
 
 ```{r}
 
