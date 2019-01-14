@@ -8,7 +8,9 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
   
 
 ```{r}
-
+data(dipper)
+str(dipper)
+print(dipper)
 ```
 
 
@@ -16,14 +18,24 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
 library(unmarked)
 library(marked)
 library(RMark)
+library(ggplot2)
 
-cap <- read.csv("capturehistory.csv")
+cap <- read.csv("capturehistory2.csv", stringsAsFactors = F)
 str(cap)
+print(cap)
 ```
 
 ```{r}
 cap.y <- cap[,c("c1", "c2", "c3", "c4" , "c5", "c6", "c7", "c8", "c9", "c10", "c11")] #was doing this based on the N-mixture model, but not sure if it's really what I want to do
 ```
+
+```{r}
+data(cap)
+cap$ch <- as.character(cap$ch) #trying to make ch characters because of error "Error in strsplit(data$ch, "") : non-character argument"
+model=crm(cap)
+```
+
+
 
 ```{r}
 mod=crm(cap,model="JS",groups="Sex",model.parameters=list(Phi=list(formula=~Sex),p=list(formula=~code)))
