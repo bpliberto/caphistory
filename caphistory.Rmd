@@ -6,6 +6,11 @@ output: word_document
 ---
 Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
   
+```{r}
+library(marked)
+library(RMark)
+library(ggplot2)
+```
 
 ```{r}
 data(dipper)
@@ -15,23 +20,30 @@ print(dipper)
 
 
 ```{r}
-library(unmarked)
-library(marked)
-library(RMark)
-library(ggplot2)
-
-cap <- read.csv("capturehistory2.csv", stringsAsFactors = F)
+cap <- read.csv("capturehistory.csv", stringsAsFactors = F)
 str(cap)
 print(cap)
 ```
 
 ```{r}
-cap.y <- cap[,c("c1", "c2", "c3", "c4" , "c5", "c6", "c7", "c8", "c9", "c10", "c11")] #was doing this based on the N-mixture model, but not sure if it's really what I want to do
-```
+# get data formatted for MARK/RMark
 
-```{r}
-data(cap)
-cap$ch <- as.character(cap$ch) #trying to make ch characters because of error "Error in strsplit(data$ch, "") : non-character argument"
+cap$ch <- paste(cap$c1,
+                cap$c2,
+                cap$c3,
+                cap$c4,
+                cap$c5,
+                cap$c6,
+                cap$c7,
+                cap$c8,
+                cap$c9,
+                cap$c10,
+                cap$c11,
+                " ",
+                ";",
+                sep="")
+
+
 model=crm(cap)
 ```
 
