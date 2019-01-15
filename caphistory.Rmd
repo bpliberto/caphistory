@@ -33,6 +33,9 @@ cap.y <- cap[,c("c1", "c2", "c3", "c4" , "c5", "c6", "c7", "c8", "c9", "c10", "c
 data(cap)
 cap$ch <- as.character(cap$ch) #trying to make ch characters because of error "Error in strsplit(data$ch, "") : non-character argument"
 model=crm(cap)
+model
+model=cjs.hessian(model)
+model
 ```
 
 
