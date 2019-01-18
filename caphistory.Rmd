@@ -15,7 +15,7 @@ library(reshape)
 
 
 ```{r}
-cap <- read.csv("recapturehistory.csv", stringsAsFactors = F)
+cap <- read.csv("capturehistory.csv", stringsAsFactors = F)
 str(cap)
 print(cap)
 ```
@@ -46,6 +46,7 @@ pivot[is.na(pivot)]=0
 pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
 lh <- 11
 
+
 pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
 pivot[2:lh] <- NULL # drops individual encounter columns
 # create commented tag
@@ -56,6 +57,8 @@ pivot <- pivot[order(cap$ch,decreasing=TRUE),]
 pivot$end <- "1;";
 # write out the input file
 write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
 
 model=crm(cap)
 model
