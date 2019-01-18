@@ -10,6 +10,7 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
 library(marked)
 library(RMark)
 library(ggplot2)
+library(reshape)
 ```
 
 ```{r}
@@ -20,7 +21,7 @@ print(dipper)
 
 
 ```{r}
-cap <- read.csv("capturehistory.csv", stringsAsFactors = F)
+cap <- read.csv("recapturehistory.csv", stringsAsFactors = F)
 str(cap)
 print(cap)
 ```
@@ -42,6 +43,11 @@ cap$ch <- paste(cap$c1,
                 " ",
                 ";",
                 sep="")
+
+data=data.frame(cap); data
+transform=melt(data, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
 
 
 model=crm(cap)
