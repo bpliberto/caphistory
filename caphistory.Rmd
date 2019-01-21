@@ -15,7 +15,7 @@ library(reshape)
 
 
 ```{r}
-cap <- read.csv("capturehistory.csv", stringsAsFactors = F)
+cap <- read.csv("capturehistorytagandchONLY.csv", stringsAsFactors = F)
 str(cap)
 print(cap)
 ```
