@@ -44,7 +44,7 @@ pivot=cast(transform, mark.number ~ value)
 pivot[is.na(pivot)]=0
 
 pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
-lh <- max(11)-min(1)+2;
+lh <- 11;
 
 
 pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
