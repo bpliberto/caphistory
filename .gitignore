@@ -2,3 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
+*.inp
+*.out
+*.res
+*.vcv
+*.tmp
+.DS_Store
+*.DS_Store
