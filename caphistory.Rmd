@@ -10,7 +10,6 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
 library(marked)
 library(RMark)
 library(ggplot2)
-library(reshape)
 ```
 
 
@@ -18,11 +17,17 @@ library(reshape)
 cap <- read.csv("capturehistory.csv", stringsAsFactors = F)
 str(cap)
 print(cap)
+summary(cap)
+cap <- cap[which(!is.na(cap$c1)), ]
+summary(cap)
 ```
 
-```{r}
-# get data formatted for MARK/RMark
+## Format data for MARK
 
+```{r, eval=FALSE}
+library(reshape)
+
+# get data formatted for MARK/RMark
 cap$ch <- paste(cap$c1,
                 cap$c2,
                 cap$c3,
@@ -38,7 +43,9 @@ cap$ch <- paste(cap$c1,
                 ";",
                 sep="")
 
-data=data.frame(cap); data
+
+data=data.frame(cap)
+data
 transform=melt(cap, id.vars="mark.number")
 pivot=cast(transform, mark.number ~ value)
 pivot[is.na(pivot)]=0
@@ -59,8 +66,27 @@ pivot$end <- "1;";
 write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
 
 pivot
+```
 
-model=crm(cap)
+## Format data for marked package
+
+```{r}
+
+marked_df <- cap
+
+marked_df$ch <- paste0(cap$c1,
+                cap$c2,
+                cap$c3,
+                cap$c4,
+                cap$c5,
+                cap$c6,
+                cap$c7,
+                cap$c8,
+                cap$c9,
+                cap$c10,
+                cap$c11)
+                
+model=crm(marked_df)
 model
 model=cjs.hessian(model)
 model
@@ -69,12 +95,38 @@ model
 
 
 ```{r}
-mod=crm(cap,model="JS",groups="Sex",model.parameters=list(Phi=list(formula=~Sex),p=list(formula=~code)))
+str(marked_df)
+marked_df$sex.fac <- as.factor(marked_df$sex)
+marked_df$species.fac <- as.factor(marked_df$species)
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
 mod$results$beta #found online but not sure how to use it
+mod
+
+cjs.hessian(mod)
+
+str(mod)
+# get values on real scale and not logit or log scales
+mod$results$reals
+
+
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+mod$results$beta #found online but not sure how to use it
+mod
+mod$results$reals
 ```
 
+# Run with RMark
+
 ```{r}
-Model.1 = mark(hw.proc,hw.ddl,model.parameters=list(Phi=Phi.ct,p=p.ct),output = FALSE,delete=T) #found online as well but don't know how to use it
+mark(marked_df, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
 
 
