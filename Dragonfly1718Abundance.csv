@@ -1,0 +1,26 @@
+Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,darnerprop,openwater,Richness,Abundance,adulteffort,adjusted abundance
+Cranesville MCRB,adult,CMCRBa,6.97,776,2,2,0.5,1388,4,4,5.08,0.787401575
+Cranesville N Farm Pond,adult,CNFPa,7.22,786,2,1,0.030508475,761,16,295,5.3,55.66037736
+Cranesville Powerlines,adult,CPa,6.97,777,2,2,0.03125,2981,9,128,,
+Cranesville Trails,adult,CTa,4.8,778,1,1,0.005263158,67.55,17,190,21.85,8.695652174
+Cranesville WOSR,adult,CWOSRa,6.97,865,2,2,0.013888889,865,7,72,5.58,12.90322581
+Cunningham Swamp,adult,CSa,7.03,781,2,1,0.006535948,3546,17,306,10.06,30.41749503
+Finzel Swamp,adult,FSa,6.56,824,2,1,0.047120419,7737,23,382,27.2,14.04411765
+Glade Run,adult,GRa,4.67,742,1,2,0,394,2,7,2.05,3.414634146
+Hammel Glade,adult,HGa,6.66,774,2,2,0.008547009,7127,13,117,4.28,27.3364486
+Highest Bog,adult,HBa,4.5,851,1,1,0.002926421,13939.61,20,4784,50.75,94.26600985
+Mt Nebo WMA,adult,MNa,6.2,745,2,1,0.127272727,9530,14,55,16.48,3.337378641
+Murley Run,adult,MRa,5.02,748,1,2,0.2,883,6,10,5.82,1.718213058
+N Cherry Creek Bog,adult,NCCBa,6.12,821,2,1,0.011730205,15377.6,14,341,15.96,21.36591479
+N Cherry Creek Ponds,adult,NCCPa,4.32,827,1,1,0.015384615,1951.5,19,520,24.1,21.57676349
+Nemesis Mt Bog N,adult,NBNa,4.15,832,1,1,0,105.58,11,54,15.58,3.465982028
+Nemesis Mt Bog S,adult,NBSa,4.34,828,1,1,0.015806988,3021.7,28,1202,67.58,17.78632732
+Nemesis Mt Power Line Pools,adult,NMPLa,4.53,837,1,1,0,122.25,12,237,10.13,23.3958539
+Piney Reservoir,adult,PRa,6.9,724,2,2,0.011111111,6716,7,90,15.75,5.714285714
+Pronghorn Swamp,adult,PSa,6.15,752,1,1,0,376,5,32,4.92,6.504065041
+Salting Grounds,adult,SGa,6.26,730,2,1,0,3707,21,274,13.32,20.57057057
+Snaggy Marsh,adult,SMa,6.15,739,1,2,0.032258065,342,8,31,4.66,6.652360515
+Tannery Wetland,adult,TWa,6.4,751,2,2,0.125,279,6,8,5.66,1.413427562
+The Glades,adult,TGa,5.36,815,2,1,0.033088235,1197,23,272,40.45,6.724351051
+Wolf Swamp N,adult,WFa,5.9,786,2,2,0.04040404,4880,13,198,15.66,12.64367816
+,,,,,,,,,,,,
