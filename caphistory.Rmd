@@ -155,8 +155,8 @@ mod10<-glm(data$adjusted.abundance~data$elevation*data$fishpresence)
 mod11<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic)
 mod12<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
 mod13<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic)
-mod14<-glm(data$adjusted.abundance~data$fishpresence*data$openwater)
-mod15<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Chicken dinner  #####
+mod14<-glm(data$adjusted.abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
+mod15<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
 mod16<-glm(data$adjusted.abundance~data$lenticlotic*data$openwater)
 
 
@@ -174,8 +174,8 @@ AIC(mod10, k=2)
 AIC(mod11, k=2)
 AIC(mod12, k=2)
 AIC(mod13, k=2)
-AIC(mod14, k=2)
-AIC(mod15, k=2) #### Chicken dinner  #####
+AIC(mod14, k=2) #### Chicken dinner  #####
+AIC(mod15, k=2) #### Almost the same ####
 AIC(mod16, k=2)
 
 

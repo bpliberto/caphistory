@@ -1,8 +1,8 @@
 Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,darnerprop,openwater,Richness,Abundance,adulteffort,adjusted abundance
 Cranesville MCRB,adult,CMCRBa,6.97,776,2,2,0.5,1388,4,4,5.08,0.787401575
 Cranesville N Farm Pond,adult,CNFPa,7.22,786,2,1,0.030508475,761,16,295,5.3,55.66037736
-Cranesville Powerlines,adult,CPa,6.97,777,2,2,0.03125,2981,9,128,,
-Cranesville Trails,adult,CTa,4.8,778,1,1,0.005263158,67.55,17,190,21.85,8.695652174
+Cranesville Powerlines,adult,CPa,6.97,777,2,2,0.03125,2981,9,128,6.069444444,21.08924485
+Cranesville Trails,adult,CTa,4.8,778,1,1,0.005263158,67.55,17,190,15.78055556,12.04013378
 Cranesville WOSR,adult,CWOSRa,6.97,865,2,2,0.013888889,865,7,72,5.58,12.90322581
 Cunningham Swamp,adult,CSa,7.03,781,2,1,0.006535948,3546,17,306,10.06,30.41749503
 Finzel Swamp,adult,FSa,6.56,824,2,1,0.047120419,7737,23,382,27.2,14.04411765
