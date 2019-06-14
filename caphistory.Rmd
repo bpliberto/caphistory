@@ -175,7 +175,7 @@ AIC(mod11, k=2)
 AIC(mod12, k=2)
 AIC(mod13, k=2)
 AIC(mod14, k=2) #### Chicken dinner  #####
-AIC(mod15, k=2) #### Almost the same ####
+AIC(mod15, k=2) #### Almost the same, 0.1258 difference ####
 AIC(mod16, k=2)
 
 
