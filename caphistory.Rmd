@@ -130,11 +130,6 @@ mark(marked_df, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$
 ```
 
 
-
-
-
-
-
 abundance/effort AIC vvvv
 
 ```{r}
@@ -184,7 +179,7 @@ AIC(mod16, k=2)
 
 
 
-richness vvvvv
+richness (jsut to see) vvvvv
 
 ```{r}
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
