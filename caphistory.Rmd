@@ -123,7 +123,7 @@ mod
 mod$results$reals
 ```
 
-# Run with RMark
+# Run with RMark (need to download Program MARK in order for this to work)
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
