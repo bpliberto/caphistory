@@ -1,10 +1,19 @@
 ---
 title: "caphistory"
 author: "Bethany Liberto"
-date: "January 10, 2019"
-output: word_document
+date: "June 16, 2019"
+output:
+  word_document: default
 ---
+
 Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T,
+                      results = "hide") ##This just hides outputs when knitting because it was like 60 pages
+options(warn=-1) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
+```
+  
   
 ```{r}
 library(marked)
