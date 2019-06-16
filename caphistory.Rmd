@@ -189,7 +189,7 @@ AIC(mod16, k=2)
 
 
 
-richness (jsut to see) vvvvv
+richness (just to see) vvvvv
 
 ```{r}
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
