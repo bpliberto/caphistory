@@ -126,6 +126,7 @@ mod$results$reals
 # Run with RMark
 
 ```{r}
+MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_df, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
 
