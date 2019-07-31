@@ -127,7 +127,7 @@ mod <- crm(marked_df,
         groups = c("species.fac"), 
         model.parameters=list(Phi = list(formula = ~species.fac), 
                               p = list(formula = ~species.fac)))
-mod$results$beta #found online but not sure how to use it
+mod$results$beta 
 mod
 mod$results$reals
 ```
