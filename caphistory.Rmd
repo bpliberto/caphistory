@@ -101,7 +101,7 @@ model=cjs.hessian(model)
 model
 ```
 
-looking at sex and species. phi= apparent survival estimate. p=capture probability
+looking at sex and species. phi= apparent survival estimate. p=capture probability N=population estimate
 
 ```{r}
 str(marked_df)
