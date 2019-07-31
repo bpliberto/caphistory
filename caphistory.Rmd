@@ -170,15 +170,17 @@ mod$results$reals
 
 
 
-
-
-
 # Run with RMark (need to download Program MARK in order for this to work)
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_df, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
+
+
+
+
+
 
 
 abundance/effort AIC vvvv
