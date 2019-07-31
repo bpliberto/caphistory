@@ -101,7 +101,7 @@ model=cjs.hessian(model)
 model
 ```
 
-
+looking at sex and species
 
 ```{r}
 str(marked_df)
@@ -131,6 +131,50 @@ mod$results$beta
 mod
 mod$results$reals
 ```
+
+
+looking at location and species
+
+```{r}
+str(marked_df)
+marked_df$location.fac <- as.factor(marked_df$location)
+marked_df$species.fac <- as.factor(marked_df$species)
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("location.fac"), 
+        model.parameters=list(Phi = list(formula = ~location.fac), 
+                              p = list(formula = ~1)))
+mod$results$beta #found online but not sure how to use it
+mod
+
+cjs.hessian(mod)
+
+str(mod)
+# get values on real scale and not logit or log scales
+mod$results$reals
+
+
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+mod$results$beta 
+mod
+mod$results$reals
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Run with RMark (need to download Program MARK in order for this to work)
 
