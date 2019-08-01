@@ -166,8 +166,72 @@ mod$results$reals
 
 
 
-need to look at just crimsons and hudsonians and their habitats
+need to look at just crimsons and hudsonians and their habitats. First looking at Crimsons
 
+```{r}
+cap <- read.csv("capturehistoryCrimsons.csv", stringsAsFactors = F)
+str(cap)
+print(cap)
+summary(cap)
+cap <- cap[which(!is.na(cap$c1)), ]
+summary(cap)
+```
+
+CJS of just Crimsons
+
+```{r}
+marked_dfC <- cap #of Crimsons
+
+marked_df$ch <- paste0(cap$c1,
+                cap$c2,
+                cap$c3,
+                cap$c4,
+                cap$c5,
+                cap$c6,
+                cap$c7,
+                cap$c8,
+                cap$c9,
+                cap$c10,
+                cap$c11)
+                
+model=crm(marked_dfC)
+model
+model=cjs.hessian(model)
+model
+```
+
+
+Crimsons location
+
+
+```{r}
+str(marked_dfC)
+marked_df$location.fac <- as.factor(marked_df$location)
+marked_df$species.fac <- as.factor(marked_df$species)
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("location.fac"), 
+        model.parameters=list(Phi = list(formula = ~location.fac), 
+                              p = list(formula = ~1)))
+mod$results$beta #found online but not sure how to use it
+mod
+
+cjs.hessian(mod)
+
+str(mod)
+# get values on real scale and not logit or log scales
+mod$results$reals
+
+
+mod <- crm(marked_df, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+mod$results$beta 
+mod
+mod$results$reals
+```
 
 
 # Run with RMark (need to download Program MARK in order for this to work)
