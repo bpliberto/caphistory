@@ -255,12 +255,12 @@ modC <- crm(marked_dfC,
         groups = c("location.fac"), 
         model.parameters=list(Phi = list(formula = ~location.fac), 
                               p = list(formula = ~1)))
-mod$results$beta #found online but not sure how to use it
-mod
+modC$results$beta #found online but not sure how to use it
+modC
 
-cjs.hessian(mod)
+cjs.hessian(modC)
 
-str(mod)
+str(modC)
 # get values on real scale and not logit or log scales
 mod$results$reals
 
@@ -269,6 +269,119 @@ modC$results$beta
 modC
 modC$results$reals
 ```
+
+
+
+
+
+need to look at just crimsons and hudsonians and their habitats. Looking at Hudsonians
+
+```{r}
+cap <- read.csv("capturehistoryHudsonians.csv", stringsAsFactors = F)
+str(cap)
+print(cap)
+summary(cap)
+cap <- cap[which(!is.na(cap$c1)), ]
+summary(cap)
+
+library(reshape)
+
+# get data formatted for MARK/RMark
+cap$ch <- paste(cap$c1,
+                cap$c2,
+                cap$c3,
+                cap$c4,
+                cap$c5,
+                cap$c6,
+                cap$c7,
+                cap$c8,
+                cap$c9,
+                cap$c10,
+                cap$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(cap)
+data
+transform=melt(cap, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+```
+
+CJS of just Hudsonians
+
+```{r}
+marked_dfH <- cap #of Hudsonians
+
+marked_dfH$ch <- paste0(cap$c1,
+                cap$c2,
+                cap$c3,
+                cap$c4,
+                cap$c5,
+                cap$c6,
+                cap$c7,
+                cap$c8,
+                cap$c9,
+                cap$c10,
+                cap$c11)
+                
+model=crm(marked_dfH)
+model
+model=cjs.hessian(model)
+model
+```
+
+
+Hudsonians location. Had to get rid of species fact stuff since this only has 1 spp
+
+
+```{r}
+str(marked_dfH)
+marked_dfH$location.fac <- as.factor(marked_dfH$location)
+marked_dfH$species.fac <- as.factor(marked_dfH$species)
+modH <- crm(marked_dfH, 
+        model="JS", 
+        groups = c("location.fac"), 
+        model.parameters=list(Phi = list(formula = ~location.fac), 
+                              p = list(formula = ~1)))
+modH$results$beta #found online but not sure how to use it
+modH
+
+cjs.hessian(modH)
+
+str(modH)
+# get values on real scale and not logit or log scales
+modH$results$reals
+
+
+modH$results$beta 
+modH
+modH$results$reals
+```
+
+
+
+
+
 
 
 # Run with RMark (need to download Program MARK in order for this to work). This is also looking at all species and locations
