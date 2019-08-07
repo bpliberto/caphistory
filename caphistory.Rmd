@@ -622,7 +622,126 @@ mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 ```
 
 
+####okay now for CT
 
+```{r}
+capCT <- read.csv("capturehistoryCT.csv", stringsAsFactors = F)
+str(capCT)
+print(capCT)
+summary(capCT)
+capCT <- capCT[which(!is.na(capCT$c1)), ]
+summary(capCT)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capCT$ch <- paste(capCT$c1,
+                capCT$c2,
+                capCT$c3,
+                capCT$c4,
+                capCT$c5,
+                capCT$c6,
+                capCT$c7,
+                capCT$c8,
+                capCT$c9,
+                capCT$c10,
+                capCT$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capCT)
+data
+transform=melt(capCT, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfCT <- capCT
+
+marked_dfCT$ch <- paste0(capCT$c1,
+                capCT$c2,
+                capCT$c3,
+                capCT$c4,
+                capCT$c5,
+                capCT$c6,
+                capCT$c7,
+                capCT$c8,
+                capCT$c9,
+                capCT$c10,
+                capCT$c11)
+                
+model=crm(marked_dfCT)
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfCT)
+marked_dfCT$sex.fac <- as.factor(marked_dfCT$sex)
+marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
+modCT <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modCT$results$beta #found online but not sure how to use it
+modCT
+
+cjs.hessian(modCT)
+
+str(modCT)
+# get values on real scale and not logit or log scales
+modCT$results$reals
+
+
+modCT <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modCT$results$beta 
+modCT
+modCT$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
 
 
 
