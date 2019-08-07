@@ -501,7 +501,7 @@ AIC(mod16, k=2)
 
 
 
-these are all the JS and CJS for each location
+these are all the JS and CJS for each location. Starting with NMBS
 ```{r}
 capNMBS <- read.csv("capturehistoryNMBS.csv", stringsAsFactors = F)
 str(capNMBS)
@@ -612,10 +612,14 @@ modNMBS$results$reals
 ```
 
 
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 
 
-
-
+```
 
 
 
