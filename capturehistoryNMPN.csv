@@ -1,0 +1,17 @@
+location,species,sex,mark number,Date of initial capture,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11
+NMPN,PaiSki,m,2,11-May-18,1,0,0,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,4,11-May-18,1,0,0,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,19,23-May-18,0,1,0,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,20,23-May-18,0,1,0,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,21,23-May-18,0,1,0,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,22,23-May-18,0,1,0,0,0,0,0,0,0,0,0
+NMPN,CrRWhi,f,172,4-Jun-18,0,0,1,0,0,0,0,0,0,0,0
+NMPN,PaiSki,m,350,14-Jun-18,0,0,0,1,0,0,0,0,0,0,0
+NMPN,PaiSki,m,351,14-Jun-18,0,0,0,1,0,0,0,0,0,0,0
+NMPN,PaiSki,m,440,26-Jun-18,0,0,0,0,1,0,0,0,0,0,0
+NMPN,PaiSki,m,447,29-Jun-18,0,0,0,0,0,1,0,0,0,0,0
+NMPN,PaiSki,m,448,29-Jun-18,0,0,0,0,0,1,0,0,0,0,0
+NMPN,ChFCor,f,449,29-Jun-18,0,0,0,0,0,1,0,0,0,0,0
+NMPN,AmeEme,m,450,29-Jun-18,0,0,0,0,0,1,0,0,0,0,0
+NMPN,UniClu,m,451,29-Jun-18,0,0,0,0,0,1,0,0,0,0,0
+NMPN,BWiSki,m,564,9-Jul-18,0,0,0,0,0,0,1,0,0,0,0
