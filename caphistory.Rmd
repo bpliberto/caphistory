@@ -947,7 +947,7 @@ marked_dfNMBN$ch <- paste0(capNMBN$c1,
                 capNMBN$c10,
                 capNMBN$c11)
                 
-model=crm(marked_dfNMBN) #help wanted
+model=crm(marked_dfNMBN) 
 model
 model=cjs.hessian(model)
 model
