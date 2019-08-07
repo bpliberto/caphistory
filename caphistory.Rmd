@@ -501,12 +501,115 @@ AIC(mod16, k=2)
 
 
 
+these are all the JS and CJS for each location
+```{r}
+capNMBS <- read.csv("capturehistoryNMBS.csv", stringsAsFactors = F)
+str(capNMBS)
+print(capNMBS)
+summary(capNMBS)
+capNMBS <- capNMBS[which(!is.na(capNMBS$c1)), ]
+summary(capNMBS)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capNMBS$ch <- paste(capNMBS$c1,
+                capNMBS$c2,
+                capNMBS$c3,
+                capNMBS$c4,
+                capNMBS$c5,
+                capNMBS$c6,
+                capNMBS$c7,
+                capNMBS$c8,
+                capNMBS$c9,
+                capNMBS$c10,
+                capNMBS$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capNMBS)
+data
+transform=melt(capNMBS, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
 
 
 
+```{r}
+## Format data for marked package
+
+marked_dfNMBS <- capNMBS
+
+marked_dfNMBS$ch <- paste0(capNMBS$c1,
+                capNMBS$c2,
+                capNMBS$c3,
+                capNMBS$c4,
+                capNMBS$c5,
+                capNMBS$c6,
+                capNMBS$c7,
+                capNMBS$c8,
+                capNMBS$c9,
+                capNMBS$c10,
+                capNMBS$c11)
+                
+model=crm(marked_dfNMBS)
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfNMBS)
+marked_dfNMBS$sex.fac <- as.factor(marked_dfNMBS$sex)
+marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
+modNMBS <- crm(marked_dfNMBS, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modNMBS$results$beta #found online but not sure how to use it
+modNMBS
+
+cjs.hessian(modNMBS)
+
+str(modNMBS)
+# get values on real scale and not logit or log scales
+modNMBS$results$reals
 
 
-
+modNMBS <- crm(marked_dfNMBS, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modNMBS$results$beta 
+modNMBS
+modNMBS$results$reals
+```
 
 
 
