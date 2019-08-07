@@ -746,3 +746,126 @@ mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$result
 
 
 
+####okay now for HB
+
+```{r}
+capHB <- read.csv("capturehistoryHB.csv", stringsAsFactors = F)
+str(capHB)
+print(capHB)
+summary(capHB)
+capHB <- capHB[which(!is.na(capHB$c1)), ]
+summary(capHB)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capHB$ch <- paste(capHB$c1,
+                capHB$c2,
+                capHB$c3,
+                capHB$c4,
+                capHB$c5,
+                capHB$c6,
+                capHB$c7,
+                capHB$c8,
+                capHB$c9,
+                capHB$c10,
+                capHB$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capHB)
+data
+transform=melt(capHB, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfHB <- capHB
+
+marked_dfHB$ch <- paste0(capHB$c1,
+                capHB$c2,
+                capHB$c3,
+                capHB$c4,
+                capHB$c5,
+                capHB$c6,
+                capHB$c7,
+                capHB$c8,
+                capHB$c9,
+                capHB$c10,
+                capHB$c11)
+                
+model=crm(marked_dfHB)
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfHB)
+marked_dfHB$sex.fac <- as.factor(marked_dfHB$sex)
+marked_dfHB$species.fac <- as.factor(marked_dfHB$species)
+modHB <- crm(marked_dfHB, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modHB$results$beta #found online but not sure how to use it
+modHB
+
+cjs.hessian(modHB)
+
+str(modHB)
+# get values on real scale and not logit or log scales
+modHB$results$reals
+
+
+modHB <- crm(marked_dfHB, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modHB$results$beta 
+modHB
+modHB$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfHB, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
+
+
+
