@@ -391,8 +391,19 @@ MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_df, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
 
+CJS crimsons
 
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfC, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+```
 
+CJS hudsonians
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfH, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+```
 
 
 
