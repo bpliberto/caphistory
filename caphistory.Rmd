@@ -1477,7 +1477,7 @@ modCLSA$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NCCB only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at CLSA only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -1487,6 +1487,126 @@ mark(marked_dfCLSA, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 ```
 
 
+####okay now for NCCP
+
+```{r}
+capNCCP <- read.csv("capturehistoryNCCP.csv", stringsAsFactors = F)
+str(capNCCP)
+print(capNCCP)
+summary(capNCCP)
+capNCCP <- capNCCP[which(!is.na(capNCCP$c1)), ]
+summary(capNCCP)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capNCCP$ch <- paste(capNCCP$c1,
+                capNCCP$c2,
+                capNCCP$c3,
+                capNCCP$c4,
+                capNCCP$c5,
+                capNCCP$c6,
+                capNCCP$c7,
+                capNCCP$c8,
+                capNCCP$c9,
+                capNCCP$c10,
+                capNCCP$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capNCCP)
+data
+transform=melt(capNCCP, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfNCCP <- capNCCP
+
+marked_dfNCCP$ch <- paste0(capNCCP$c1,
+                capNCCP$c2,
+                capNCCP$c3,
+                capNCCP$c4,
+                capNCCP$c5,
+                capNCCP$c6,
+                capNCCP$c7,
+                capNCCP$c8,
+                capNCCP$c9,
+                capNCCP$c10,
+                capNCCP$c11)
+                
+model=crm(marked_dfNCCP) 
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfNCCP)
+marked_dfNCCP$sex.fac <- as.factor(marked_dfNCCP$sex)
+marked_dfNCCP$species.fac <- as.factor(marked_dfNCCP$species)
+modNCCP <- crm(marked_dfNCCP, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modNCCP$results$beta #found online but not sure how to use it
+modNCCP
+
+cjs.hessian(modNCCP)
+
+str(modNCCP)
+# get values on real scale and not logit or log scales
+modNCCP$results$reals
+
+
+modNCCP <- crm(marked_dfNCCP, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modNCCP$results$beta 
+modNCCP
+modNCCP$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NCCP only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfNCCP, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
 
 
 
