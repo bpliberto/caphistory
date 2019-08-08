@@ -996,7 +996,126 @@ mark(marked_dfNMBN, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 
 
 
+####okay now for NMPN
 
+```{r}
+capNMPN <- read.csv("capturehistoryNMPN.csv", stringsAsFactors = F)
+str(capNMPN)
+print(capNMPN)
+summary(capNMPN)
+capNMPN <- capNMPN[which(!is.na(capNMPN$c1)), ]
+summary(capNMPN)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capNMPN$ch <- paste(capNMPN$c1,
+                capNMPN$c2,
+                capNMPN$c3,
+                capNMPN$c4,
+                capNMPN$c5,
+                capNMPN$c6,
+                capNMPN$c7,
+                capNMPN$c8,
+                capNMPN$c9,
+                capNMPN$c10,
+                capNMPN$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capNMPN)
+data
+transform=melt(capNMPN, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfNMPN <- capNMPN
+
+marked_dfNMPN$ch <- paste0(capNMPN$c1,
+                capNMPN$c2,
+                capNMPN$c3,
+                capNMPN$c4,
+                capNMPN$c5,
+                capNMPN$c6,
+                capNMPN$c7,
+                capNMPN$c8,
+                capNMPN$c9,
+                capNMPN$c10,
+                capNMPN$c11)
+                
+model=crm(marked_dfNMPN) 
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfNMPN)
+marked_dfNMPN$sex.fac <- as.factor(marked_dfNMPN$sex)
+marked_dfNMPN$species.fac <- as.factor(marked_dfNMPN$species)
+modNMPN <- crm(marked_dfNMPN, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modNMPN$results$beta #found online but not sure how to use it
+modNMPN
+
+cjs.hessian(modNMPN)
+
+str(modNMPN)
+# get values on real scale and not logit or log scales
+modNMPN$results$reals
+
+
+modNMPN <- crm(marked_dNMPN, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modNMPN$results$beta 
+modNMPN
+modNMPN$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfNMPN, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
 
 
 
