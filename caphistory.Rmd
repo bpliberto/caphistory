@@ -734,7 +734,7 @@ modCT$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at CT only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -858,7 +858,7 @@ modHB$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at HB only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -985,7 +985,7 @@ modNMBN$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBN only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -1108,7 +1108,7 @@ modNMPN$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMPN only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -1354,7 +1354,7 @@ modNCCB$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMPS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NCCB only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -1365,6 +1365,126 @@ mark(marked_dfNCCB, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 
 
 
+####okay now for CLSA
+
+```{r}
+capCLSA <- read.csv("capturehistoryCLSA.csv", stringsAsFactors = F)
+str(capCLSA)
+print(capCLSA)
+summary(capCLSA)
+capCLSA <- capCLSA[which(!is.na(capCLSA$c1)), ]
+summary(capCLSA)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capCLSA$ch <- paste(capCLSA$c1,
+                capCLSA$c2,
+                capCLSA$c3,
+                capCLSA$c4,
+                capCLSA$c5,
+                capCLSA$c6,
+                capCLSA$c7,
+                capCLSA$c8,
+                capCLSA$c9,
+                capCLSA$c10,
+                capCLSA$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capCLSA)
+data
+transform=melt(capCLSA, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfCLSA <- capCLSA
+
+marked_dfCLSA$ch <- paste0(capCLSA$c1,
+                capCLSA$c2,
+                capCLSA$c3,
+                capCLSA$c4,
+                capCLSA$c5,
+                capCLSA$c6,
+                capCLSA$c7,
+                capCLSA$c8,
+                capCLSA$c9,
+                capCLSA$c10,
+                capCLSA$c11)
+                
+model=crm(marked_dfCLSA) 
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfCLSA)
+marked_dfCLSA$sex.fac <- as.factor(marked_dfCLSA$sex)
+marked_dfCLSA$species.fac <- as.factor(marked_dfCLSA$species)
+modCLSA <- crm(marked_dfCLSA, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modCLSA$results$beta #found online but not sure how to use it
+modCLSA
+
+cjs.hessian(modCLSA)
+
+str(modCLSA)
+# get values on real scale and not logit or log scales
+modCLSA$results$reals
+
+
+modCLSA <- crm(marked_dfCLSA, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modCLSA$results$beta 
+modCLSA
+modCLSA$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NCCB only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfCLSA, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
 
 
 
