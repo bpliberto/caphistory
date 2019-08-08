@@ -743,7 +743,7 @@ mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$result
 
 ```
 
-
+############# Error City ##################
 
 
 ####okay now for HB
