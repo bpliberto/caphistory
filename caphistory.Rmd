@@ -1272,7 +1272,7 @@ capNCCB$ch <- paste(capNCCB$c1,
                 sep="")
 
 
-data=data.frame(capNMPS)
+data=data.frame(capNCCB)
 data
 transform=melt(capNCCB, id.vars="mark.number")
 pivot=cast(transform, mark.number ~ value)
