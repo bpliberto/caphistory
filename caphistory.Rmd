@@ -974,7 +974,7 @@ str(modNMBN)
 modNMBN$results$reals
 
 
-modNMBN <- crm(marked_dNMBN, 
+modNMBN <- crm(marked_dfNMBN, 
         model="JS", 
         groups = c("species.fac"), 
         model.parameters=list(Phi = list(formula = ~species.fac), 
@@ -1097,7 +1097,7 @@ str(modNMPN)
 modNMPN$results$reals
 
 
-modNMPN <- crm(marked_dNMPN, 
+modNMPN <- crm(marked_dfNMPN, 
         model="JS", 
         groups = c("species.fac"), 
         model.parameters=list(Phi = list(formula = ~species.fac), 
@@ -1220,7 +1220,7 @@ str(modNMPS)
 modNMPS$results$reals
 
 
-modNMPS <- crm(marked_dNMPS, 
+modNMPS <- crm(marked_dfNMPS, 
         model="JS", 
         groups = c("species.fac"), 
         model.parameters=list(Phi = list(formula = ~species.fac), 
@@ -1231,7 +1231,7 @@ modNMPS$results$reals
 ```
 
 
-# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMPS only
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
@@ -1242,6 +1242,126 @@ mark(marked_dfNMPS, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 
 
 
+####okay now for NCCB
+
+```{r}
+capNCCB <- read.csv("capturehistoryNCCB.csv", stringsAsFactors = F)
+str(capNCCB)
+print(capNCCB)
+summary(capNCCB)
+capNCCB <- capNCCB[which(!is.na(capNCCB$c1)), ]
+summary(capNCCB)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capNCCB$ch <- paste(capNCCB$c1,
+                capNCCB$c2,
+                capNCCB$c3,
+                capNCCB$c4,
+                capNCCB$c5,
+                capNCCB$c6,
+                capNCCB$c7,
+                capNCCB$c8,
+                capNCCB$c9,
+                capNCCB$c10,
+                capNCCB$c11,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capNMPS)
+data
+transform=melt(capNCCB, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfNCCB <- capNCCB
+
+marked_dfNCCB$ch <- paste0(capNCCB$c1,
+                capNCCB$c2,
+                capNCCB$c3,
+                capNCCB$c4,
+                capNCCB$c5,
+                capNCCB$c6,
+                capNCCB$c7,
+                capNCCB$c8,
+                capNCCB$c9,
+                capNCCB$c10,
+                capNCCB$c11)
+                
+model=crm(marked_dfNCCB) 
+model
+model=cjs.hessian(model)
+model
+```
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfNCCB)
+marked_dfNCCB$sex.fac <- as.factor(marked_dfNCCB$sex)
+marked_dfNCCB$species.fac <- as.factor(marked_dfNCCB$species)
+modNCCB <- crm(marked_dfNCCB, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modNCCB$results$beta #found online but not sure how to use it
+modNCCB
+
+cjs.hessian(modNCCB)
+
+str(modNCCB)
+# get values on real scale and not logit or log scales
+modNCCB$results$reals
+
+
+modNCCB <- crm(marked_dfNCCB, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modNCCB$results$beta 
+modNCCB
+modNCCB$results$reals
+```
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMPS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfNCCB, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+
+```
 
 
 
