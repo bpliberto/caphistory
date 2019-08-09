@@ -1618,7 +1618,7 @@ helpful website: http://www.montana.edu/screel/teaching/bioe-440r-521/course-out
 
 I thought maybe the reason why some of these aren't working is because there are no recaps, but I have recaps from CT, NMBS, NCCP, and CLSA. CT and NMBS are the only ones really working, which I guess is okay because those were two of the more important wetlands excluding HB. Again, for HB, it could be that it just can't be calculated because there were never any recaps, but shouldn't I still just be getting some astronomical number for population size? I expect capture probability and apparent survival to be 0, which I can get from RMARK for CJS, but that's not what it's giving me, probably because Phi and p are both equal to 1. 
 
-Also, antoher reason it might not be working for each individual location is because there aren't very many marks, so maybe the CJS/JS where I look at locations and species are good enough, although I am worried that lumping all locations together isn't really giving me what I want. The reason I wanted to split them is because the models assume there is not emigration, so it seems silly to have a bunch of locations together.
+Also, antoher reason it might not be working for each individual location is because there aren't very many marks, so maybe the CJS/JS where I look at locations and species are good enough, although I am worried that lumping all locations together isn't really giving me what I want. The reason I wanted to split them is because the models assume there is no emigration, so it seems silly to have a bunch of locations together.
 
 ```{r}
 ??rmark
