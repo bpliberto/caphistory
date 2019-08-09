@@ -756,6 +756,7 @@ summary(capHB)
 capHB <- capHB[which(!is.na(capHB$c1)), ]
 summary(capHB)
 
+
 library(reshape)
 ## Format data for MARK
 
@@ -819,7 +820,8 @@ marked_dfHB$ch <- paste0(capHB$c1,
                 capHB$c9,
                 capHB$c10,
                 capHB$c11)
-                
+       
+         
 model=crm(marked_dfHB)
 model
 model=cjs.hessian(model)
