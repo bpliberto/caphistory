@@ -741,6 +741,8 @@ MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 
 
+mark(marked_dfCT, model.parameters=list(Phi=sex.fac, p=sex.fac),output=FALSE)$results$beta
+
 ```
 
 ############# Error City ##################
