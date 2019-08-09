@@ -1610,7 +1610,15 @@ mark(marked_dfNCCP, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 
 ```
 
+Phi=, p= for RMark CJS?
 
+helpful website: http://www.montana.edu/screel/teaching/bioe-440r-521/course-outline/BIOE_440_CJS_dipper_example.html
+
+I thought maybe the reason why some of these aren't working is because there are no recaps, but I have recaps from CT, NMBS, NCCP, and CLSA. CT and NMBS are the only ones really working, which I guess is okay because those were two of the more important wetlands excluding HB. Again, for HB, it could be that it just can't be calculated because there were never any recaps, but shouldn't I still just be getting some astronomical number for population size? I expect capture probability and apparent survival to be 0, which I can get from RMARK for CJS.
+
+```{r}
+??rmark
+```
 
 
 
