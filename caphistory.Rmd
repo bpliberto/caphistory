@@ -580,6 +580,8 @@ model=cjs.hessian(model)
 model
 ```
 
+CJS: AIC  :  184.6449, Phi.(Intercept) -0.4564347, p.(Intercept)   -1.5498460
+
 looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
 
 ```{r}
