@@ -241,7 +241,7 @@ model
 model=cjs.hessian(model)
 model
 ```
-
+CJS: AIC  :  109.0686, Phi.(Intercept) -0.543118, p.(Intercept)   -1.777340
 
 Crimsons location. Had to get rid of species fact stuff since this only has Crimsons
 
@@ -262,14 +262,14 @@ cjs.hessian(modC)
 
 str(modC)
 # get values on real scale and not logit or log scales
-mod$results$reals
+modC$results$reals
 
 
 modC$results$beta 
 modC
 modC$results$reals
 ```
-
+JS: AIC  :  467.5874, N   estimate= 0.000459042
 
 
 
@@ -350,6 +350,7 @@ model=cjs.hessian(model)
 model
 ```
 
+CJS: AIC  :  97.45566, Phi.(Intercept)  0.06849942 , p.(Intercept)   -0.89009108
 
 Hudsonians location. Had to get rid of species fact stuff since this only has 1 spp
 
@@ -378,6 +379,7 @@ modH
 modH$results$reals
 ```
 
+AIC  :  185.9476, N   estimate= 0.09832891
 
 
 
@@ -398,12 +400,19 @@ MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfC, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
 
+ AICc { Phi(~1)p(~1) } = 109.14599 , Phi:(Intercept) -0.5431231, p:(Intercept)   -1.7773484
+
+
+
+
 CJS hudsonians
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfH, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 ```
+
+ AICc { Phi(~1)p(~1) } = 97.669942  , Phi:(Intercept)  0.0686517, p:(Intercept)   -0.8902974
 
 
 
