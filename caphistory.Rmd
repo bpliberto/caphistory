@@ -614,6 +614,8 @@ modNMBS$results$reals
 ```
 
 
+sex.fac : AIC  :  416.033, N estimate=  5.439211 species.fac: AIC  :  750.5, N estimate= 3.55226e-11
+
 # Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
 
 ```{r}
@@ -623,6 +625,7 @@ mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE)$resu
 
 ```
 
+ AICc { Phi(~1)p(~1) } = 184.69827 , Phi:(Intercept) -0.4564347, p:(Intercept)   -1.5498461
 
 ####okay now for CT
 
@@ -704,6 +707,9 @@ model=cjs.hessian(model)
 model
 ```
 
+CJS: AIC: 108.7434, Phi.(Intercept) -0.07818557, p.(Intercept)   -0.99078187
+
+
 looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
 
 ```{r}
@@ -735,6 +741,9 @@ modCT
 modCT$results$reals
 ```
 
+JS sex.fac: AIC  :  212.9627, N  estimate= 37.04946. Species.fac: AIC  :  283.2178, $N estimate= 7.948358e-15
+
+
 
 # Run with RMark (need to download Program MARK in order for this to work). This is looking at CT only
 
@@ -746,6 +755,8 @@ mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$result
 mark(marked_dfCT, model.parameters=list(Phi=sex.fac, p=sex.fac),output=FALSE)$results$beta
 
 ```
+
+ AICc { Phi(~1)p(~1) } = 108.91003, Phi:(Intercept) -0.078064, p:(Intercept)   -0.990952
 
 ############# Error City ##################
 
