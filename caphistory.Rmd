@@ -1647,7 +1647,7 @@ Also, antoher reason it might not be working for each individual location is bec
 ```
 
 
-
+Should I have species.fac and sex.fac for my CJS models? Why aren't my JS models running for each location? Is this useable data?
 
 
 
