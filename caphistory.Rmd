@@ -100,6 +100,8 @@ model
 model=cjs.hessian(model)
 model
 ```
+AIC  :  379.7431, Phi.(Intercept) -0.6325888, p.(Intercept) -1.8079899
+
 
 looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
 
@@ -131,6 +133,10 @@ mod$results$beta
 mod
 mod$results$reals
 ```
+sex AIC  :  890.8185, $N  estimate 15.59072
+species: AIC  :  1556.97, $N      estimate 3.176451e-15
+
+
 
 
 looking at location and species
@@ -163,6 +169,8 @@ mod$results$beta
 mod
 mod$results$reals
 ```
+location: AIC  :  1411.369, $N  estimate  1.58114
+species: AIC  :  1556.97, $N      estimate 3.176451e-15
 
 
 
