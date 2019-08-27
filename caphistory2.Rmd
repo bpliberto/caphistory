@@ -240,7 +240,7 @@ sex.fac : AIC  :  416.033, N estimate=  5.439211 species.fac: AIC  :  750.5, N e
 MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
-mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
 ```
 
  AICc { Phi(~1)p(~1) } = 184.69827 , Phi:(Intercept) -0.4564347, p:(Intercept)   -1.5498461
@@ -365,7 +365,7 @@ JS sex.fac: AIC  :  212.9627, N  estimate= 37.04946. Species.fac: AIC  :  283.21
 MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7) )$results$beta
 
-mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)),output=FALSE, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))$results$beta
+mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)),output=FALSE, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), options="SIMANNEAL")$results$beta
 
 mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
