@@ -4,8 +4,8 @@ author: "Bethany Liberto"
 date: "June 16, 2019"
 output:
   word_document: default
-editor_options: 
-  chunk_output_type: console
+editor_options:
+  chunk_output_type: inline
 ---
 
 Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
@@ -365,7 +365,7 @@ JS sex.fac: AIC  :  212.9627, N  estimate= 37.04946. Species.fac: AIC  :  283.21
 MarkPath='C:/Program Files (x86)/MARK'
 mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
 
-mark(marked_dfCT, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+mark(marked_dfCT, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))$results$beta
 
 mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
@@ -373,6 +373,12 @@ mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 ```
 
  AICc { Phi(~1)p(~1) } = 108.91003, Phi:(Intercept) -0.078064, p:(Intercept)   -0.990952
+
+
+```{r}
+??Rmark
+
+```
 
 
 
