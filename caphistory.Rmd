@@ -550,6 +550,7 @@ capNMBS$ch <- paste(capNMBS$c1,
                 capNMBS$c9,
                 capNMBS$c10,
                 capNMBS$c11,
+                capNMBS$c12,
                 " ",
                 ";",
                 sep="")
@@ -597,9 +598,10 @@ marked_dfNMBS$ch <- paste0(capNMBS$c1,
                 capNMBS$c8,
                 capNMBS$c9,
                 capNMBS$c10,
-                capNMBS$c11)
+                capNMBS$c11,
+                capNMBS$c12)
                 
-model=crm(marked_dfNMBS)
+model=crm(marked_dfNMBS, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))
 model
 model=cjs.hessian(model)
 model
@@ -675,8 +677,6 @@ capCT$ch <- paste(capCT$c1,
                 capCT$c7,
                 capCT$c8,
                 capCT$c9,
-                capCT$c10,
-                capCT$c11,
                 " ",
                 ";",
                 sep="")
@@ -722,11 +722,9 @@ marked_dfCT$ch <- paste0(capCT$c1,
                 capCT$c6,
                 capCT$c7,
                 capCT$c8,
-                capCT$c9,
-                capCT$c10,
-                capCT$c11)
+                capCT$c9)
                 
-model=crm(marked_dfCT)
+model=crm(marked_dfCT, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))
 model
 model=cjs.hessian(model)
 model
