@@ -4,8 +4,6 @@ author: "Bethany Liberto"
 date: "June 16, 2019"
 output:
   word_document: default
-editor_options: 
-  chunk_output_type: console
 ---
 
 Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
