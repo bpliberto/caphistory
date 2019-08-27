@@ -1,0 +1,382 @@
+---
+title: "caphistory2"
+author: "Bethany Liberto"
+date: "June 16, 2019"
+output:
+  word_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T,
+                      results = "hide") ##This just hides outputs when knitting because it was like 60 pages
+options(warn=-1) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
+```
+  
+  
+```{r}
+library(marked)
+library(RMark)
+library(ggplot2)
+```
+
+
+abundance/effort AIC vvvv
+
+```{r}
+
+data <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
+
+### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
+mod1<-glm(data$adjusted.abundance~data$pH)
+mod2<-glm(data$adjusted.abundance~data$elevation)
+mod3<-glm(data$adjusted.abundance~data$fishpresence)
+mod4<-glm(data$adjusted.abundance~data$lenticlotic)  
+mod5<-glm(data$adjusted.abundance~data$openwater)
+mod6<-glm(data$adjusted.abundance~data$pH*data$elevation)
+mod7<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence)
+mod8<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
+mod9<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater) 
+mod10<-glm(data$adjusted.abundance~data$elevation*data$fishpresence)
+mod11<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic)
+mod12<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
+mod13<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic)
+mod14<-glm(data$adjusted.abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
+mod15<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
+mod16<-glm(data$adjusted.abundance~data$lenticlotic*data$openwater)
+
+
+
+AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2, k=2)
+AIC(mod3, k=2)
+AIC(mod4, k=2) 
+AIC(mod5, k=2)
+AIC(mod6, k=2)
+AIC(mod7, k=2)
+AIC(mod8, k=2)
+AIC(mod9, k=2) 
+AIC(mod10, k=2)
+AIC(mod11, k=2)
+AIC(mod12, k=2)
+AIC(mod13, k=2)
+AIC(mod14, k=2) #### Chicken dinner  #####
+AIC(mod15, k=2) #### Almost the same, 0.1258 difference ####
+AIC(mod16, k=2)
+
+
+```
+
+
+
+
+richness (just to see) vvvvv
+
+```{r}
+### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
+mod1<-glm(data$Richness~data$pH)
+mod2<-glm(data$Richness~data$elevation)
+mod3<-glm(data$Richness~data$fishpresence)
+mod4<-glm(data$Richness~data$lenticlotic)  #### Chicken dinner  #####
+mod5<-glm(data$Richness~data$openwater)
+mod6<-glm(data$Richness~data$pH*data$elevation)
+mod7<-glm(data$Richness~data$pH*data$elevation*data$fishpresence)
+mod8<-glm(data$Richness~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
+mod9<-glm(data$Richness~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
+mod10<-glm(data$Richness~data$elevation*data$fishpresence)
+mod11<-glm(data$Richness~data$elevation*data$fishpresence*data$lenticlotic)
+mod12<-glm(data$Richness~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
+mod13<-glm(data$Richness~data$fishpresence*data$lenticlotic)
+mod14<-glm(data$Richness~data$fishpresence*data$openwater)
+mod15<-glm(data$Richness~data$fishpresence*data$lenticlotic*data$openwater)
+mod16<-glm(data$Richness~data$lenticlotic*data$openwater)
+
+
+
+AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2, k=2)
+AIC(mod3, k=2)
+AIC(mod4, k=2) #### Chicken dinner  #####
+AIC(mod5, k=2)
+AIC(mod6, k=2)
+AIC(mod7, k=2)
+AIC(mod8, k=2)
+AIC(mod9, k=2)
+AIC(mod10, k=2)
+AIC(mod11, k=2)
+AIC(mod12, k=2)
+AIC(mod13, k=2)
+AIC(mod14, k=2)
+AIC(mod15, k=2)
+AIC(mod16, k=2)
+
+```
+
+
+
+these are all the JS and CJS for each location. Starting with NMBS
+```{r}
+capNMBS <- read.csv("capturehistoryNMBS.csv", stringsAsFactors = F)
+str(capNMBS)
+print(capNMBS)
+summary(capNMBS)
+capNMBS <- capNMBS[which(!is.na(capNMBS$c1)), ]
+summary(capNMBS)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capNMBS$ch <- paste(capNMBS$c1,
+                capNMBS$c2,
+                capNMBS$c3,
+                capNMBS$c4,
+                capNMBS$c5,
+                capNMBS$c6,
+                capNMBS$c7,
+                capNMBS$c8,
+                capNMBS$c9,
+                capNMBS$c10,
+                capNMBS$c11,
+                capNMBS$c12,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capNMBS)
+data
+transform=melt(capNMBS, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfNMBS <- capNMBS
+
+marked_dfNMBS$ch <- paste0(capNMBS$c1,
+                capNMBS$c2,
+                capNMBS$c3,
+                capNMBS$c4,
+                capNMBS$c5,
+                capNMBS$c6,
+                capNMBS$c7,
+                capNMBS$c8,
+                capNMBS$c9,
+                capNMBS$c10,
+                capNMBS$c11,
+                capNMBS$c12)
+                
+model=crm(marked_dfNMBS, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))
+model
+model=cjs.hessian(model)
+model
+```
+
+CJS: AIC  :  184.6449, Phi.(Intercept) -0.4564347, p.(Intercept)   -1.5498460
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfNMBS)
+marked_dfNMBS$sex.fac <- as.factor(marked_dfNMBS$sex)
+marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
+modNMBS <- crm(marked_dfNMBS, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modNMBS$results$beta #found online but not sure how to use it
+modNMBS
+
+cjs.hessian(modNMBS)
+
+str(modNMBS)
+# get values on real scale and not logit or log scales
+modNMBS$results$reals
+
+
+modNMBS <- crm(marked_dfNMBS, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modNMBS$results$beta 
+modNMBS
+modNMBS$results$reals
+```
+
+
+sex.fac : AIC  :  416.033, N estimate=  5.439211 species.fac: AIC  :  750.5, N estimate= 3.55226e-11
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+```
+
+ AICc { Phi(~1)p(~1) } = 184.69827 , Phi:(Intercept) -0.4564347, p:(Intercept)   -1.5498461
+
+####okay now for CT
+
+```{r}
+capCT <- read.csv("capturehistoryCT.csv", stringsAsFactors = F)
+str(capCT)
+print(capCT)
+summary(capCT)
+capCT <- capCT[which(!is.na(capCT$c1)), ]
+summary(capCT)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capCT$ch <- paste(capCT$c1,
+                capCT$c2,
+                capCT$c3,
+                capCT$c4,
+                capCT$c5,
+                capCT$c6,
+                capCT$c7,
+                capCT$c8,
+                capCT$c9,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capCT)
+data
+transform=melt(capCT, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfCT <- capCT
+
+marked_dfCT$ch <- paste0(capCT$c1,
+                capCT$c2,
+                capCT$c3,
+                capCT$c4,
+                capCT$c5,
+                capCT$c6,
+                capCT$c7,
+                capCT$c8,
+                capCT$c9)
+                
+model=crm(marked_dfCT, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))
+model
+model=cjs.hessian(model)
+model
+```
+
+CJS: AIC: 108.7434, Phi.(Intercept) -0.07818557, p.(Intercept)   -0.99078187
+
+
+looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
+
+```{r}
+str(marked_dfCT)
+marked_dfCT$sex.fac <- as.factor(marked_dfCT$sex)
+marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
+modCT <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              p = list(formula = ~1)))
+modCT$results$beta #found online but not sure how to use it
+modCT
+
+cjs.hessian(modCT)
+
+str(modCT)
+# get values on real scale and not logit or log scales
+modCT$results$reals
+
+
+modCT <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(Phi = list(formula = ~species.fac), 
+                              p = list(formula = ~species.fac)))
+modCT$results$beta 
+modCT
+modCT$results$reals
+```
+
+JS sex.fac: AIC  :  212.9627, N  estimate= 37.04946. Species.fac: AIC  :  283.2178, $N estimate= 7.948358e-15
+
+
+
+# Run with RMark (need to download Program MARK in order for this to work). This is looking at CT only
+
+```{r}
+MarkPath='C:/Program Files (x86)/MARK'
+mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+mark(marked_dfCT, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE)$results$beta
+
+mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
+
+
+```
+
+ AICc { Phi(~1)p(~1) } = 108.91003, Phi:(Intercept) -0.078064, p:(Intercept)   -0.990952
+
+
+
+CJS and JS could not be run for any other mark/recap site because there were not enough recaptures.
+
+
+
