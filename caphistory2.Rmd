@@ -192,7 +192,10 @@ marked_dfNMBS$ch <- paste0(capNMBS$c1,
                 capNMBS$c11,
                 capNMBS$c12)
                 
-model=crm(marked_dfNMBS, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))
+model=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~sex.fac)))
 model
 model=cjs.hessian(model)
 model
@@ -250,9 +253,11 @@ modNMBS$results$reals
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
-mark(marked_dfNMBS, model.parameters=list(p=list(formula=~1)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mark(marked_dfNMBS, model.parameters=list(N=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
+
+??RMark
 ```
 
  AICc { Phi(~1)p(~1) } = 184.69827 , Phi:(Intercept) -0.4564347, p:(Intercept)   -1.5498461
