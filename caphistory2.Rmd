@@ -206,11 +206,17 @@ looking at sex and species. phi= apparent survival estimate. p=capture probabili
 str(marked_dfNMBS)
 marked_dfNMBS$sex.fac <- as.factor(marked_dfNMBS$sex)
 marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
+#modNMBS <- crm(marked_dfNMBS, 
+        #model="JS", 
+        #groups = c("sex.fac"), 
+        #model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              #p = list(formula = ~1)))
+
 modNMBS <- crm(marked_dfNMBS, 
         model="JS", 
         groups = c("sex.fac"), 
-        model.parameters=list(Phi = list(formula = ~sex.fac), 
-                              p = list(formula = ~1)))
+        model.parameters=list(N = list(formula = ~sex.fac)))
+
 modNMBS$results$beta #found online but not sure how to use it
 modNMBS
 
@@ -221,18 +227,24 @@ str(modNMBS)
 modNMBS$results$reals
 
 
+#modNMBS <- crm(marked_dfNMBS, 
+       # model="JS", 
+       # groups = c("species.fac"), 
+      #  model.parameters=list(Phi = list(formula = ~species.fac),    #should have for one or the other, not both
+                           #   p = list(formula = ~species.fac)))
+
 modNMBS <- crm(marked_dfNMBS, 
-        model="JS", 
-        groups = c("species.fac"), 
-        model.parameters=list(Phi = list(formula = ~species.fac),    #should have for one or the other, not both
-                              p = list(formula = ~species.fac)))
+                model="JS", 
+                groups = c("species.fac"), 
+                model.parameters=list(N = list(formula = ~species.fac)))
+
 modNMBS$results$beta 
 modNMBS
 modNMBS$results$reals
 ```
 
 
-sex.fac : AIC  :  416.033, N estimate=  5.439211 species.fac: AIC  :  750.5, N estimate= 3.55226e-11
+
 
 # Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
 
@@ -330,11 +342,17 @@ looking at sex and species. phi= apparent survival estimate. p=capture probabili
 str(marked_dfCT)
 marked_dfCT$sex.fac <- as.factor(marked_dfCT$sex)
 marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
+#modCT <- crm(marked_dfCT, 
+        #model="JS", 
+        #groups = c("sex.fac"), 
+        #model.parameters=list(Phi = list(formula = ~sex.fac), 
+                              #p = list(formula = ~1)))
+
 modCT <- crm(marked_dfCT, 
         model="JS", 
         groups = c("sex.fac"), 
-        model.parameters=list(Phi = list(formula = ~sex.fac), 
-                              p = list(formula = ~1)))
+        model.parameters=list(N = list(formula = ~sex.fac)))
+
 modCT$results$beta #found online but not sure how to use it
 modCT
 
@@ -345,11 +363,17 @@ str(modCT)
 modCT$results$reals
 
 
+#modCT <- crm(marked_dfCT, 
+        #model="JS", 
+        #groups = c("species.fac"), 
+        #model.parameters=list(Phi = list(formula = ~species.fac), 
+                              #p = list(formula = ~species.fac)))
+
 modCT <- crm(marked_dfCT, 
         model="JS", 
         groups = c("species.fac"), 
-        model.parameters=list(Phi = list(formula = ~species.fac), 
-                              p = list(formula = ~species.fac)))
+        model.parameters=list(N = list(formula = ~species.fac)))
+
 modCT$results$beta 
 modCT
 modCT$results$reals
