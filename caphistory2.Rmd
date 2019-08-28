@@ -192,13 +192,45 @@ marked_dfNMBS$ch <- paste0(capNMBS$c1,
                 capNMBS$c11,
                 capNMBS$c12)
                 
-model=crm(marked_dfNMBS,  
+marked_dfNMBS$sex.fac <- as.factor(marked_dfNMBS$sex)
+marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
+
+model1=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("sex.fac"), 
           model.parameters=list(Phi = list(formula = ~sex.fac)))
-model
-model=cjs.hessian(model)
-model
+
+model1
+model=cjs.hessian(model1)
+model1
+
+model2=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~sex.fac)))
+
+model2
+model=cjs.hessian(model2)
+model2
+
+model3=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("species.fac"), 
+          model.parameters=list(Phi = list(formula = ~species.fac)))
+
+model3
+model=cjs.hessian(model3)
+model3
+
+model4=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("species.fac"), 
+          model.parameters=list(p = list(formula = ~species.fac)))
+
+
+model4
+model=cjs.hessian(model4)
+model4
 ```
 
 CJS: AIC  :  184.6449, Phi.(Intercept) -0.4564347, p.(Intercept)   -1.5498460
