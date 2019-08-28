@@ -379,7 +379,6 @@ modCT
 modCT$results$reals
 ```
 
-JS sex.fac: AIC  :  212.9627, N  estimate= 37.04946. Species.fac: AIC  :  283.2178, $N estimate= 7.948358e-15
 
 
 
