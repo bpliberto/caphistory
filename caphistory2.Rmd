@@ -364,10 +364,50 @@ marked_dfCT$ch <- paste0(capCT$c1,
                 capCT$c8,
                 capCT$c9)
                 
-model=crm(marked_dfCT, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))
-model
-model=cjs.hessian(model)
-model
+#model=crm(marked_dfCT, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))
+#model
+#model=cjs.hessian(model)
+#model
+
+marked_dfCT$sex.fac <- as.factor(marked_dfCT$sex)
+marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
+
+model5=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~sex.fac)))
+
+model5
+model=cjs.hessian(model5)
+model5
+
+model6=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~sex.fac)))
+
+model6
+model=cjs.hessian(model6)
+model6
+
+model7=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("species.fac"), 
+          model.parameters=list(Phi = list(formula = ~species.fac)))
+
+model7
+model=cjs.hessian(model7)
+model7
+
+model8=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("species.fac"), 
+          model.parameters=list(p = list(formula = ~species.fac)))
+
+
+model8
+model=cjs.hessian(model8)
+model8
 ```
 
 CJS: AIC: 108.7434, Phi.(Intercept) -0.07818557, p.(Intercept)   -0.99078187
