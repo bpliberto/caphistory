@@ -279,9 +279,11 @@ modNMBS$results$reals
 ```
 
 ```{r}
-#NMBS.table <- collect.models(type = "JS")
+#NMBS.table <- collect.models(type = "Jolly")
 
-#This is supposed to get all the models into a nice table so I can compare AIC values but it isn't working
+#This is supposed to get all the models into a nice table so I can compare AIC values but it isn't working (because it only works with RMark)
+
+#####This is my reminder to find a way to make a table of my models AIC values#########
 ```
 
 
@@ -299,7 +301,9 @@ Phi.sex = list(formula=~marked_dfNMBS$sex.fac)
 
 mod3=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
-mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mod4=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+
+#mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 #mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
 #This Jolly code doesn't run properly. 
@@ -378,7 +382,7 @@ marked_dfCT$ch <- paste0(capCT$c1,
                 capCT$c7,
                 capCT$c8,
                 capCT$c9)
-                
+             
 #model=crm(marked_dfCT, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7))
 #model
 #model=cjs.hessian(model)
@@ -486,6 +490,9 @@ p.ct = list(formula=~1)
 Phi.sex = list(formula=~marked_dfCT$sex.fac)
 
 mod1=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+mod2=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+mod3=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+mod4=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
 
 #mod2=mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE, options="SIMANNEAL")$results$beta
 
