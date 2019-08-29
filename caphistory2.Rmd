@@ -311,7 +311,6 @@ mod6=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.c
 ??RMark
 ```
 
- AICc { Phi(~1)p(~1) } = 184.69827 , Phi:(Intercept) -0.4564347, p:(Intercept)   -1.5498461
 
 ####okay now for CT
 
@@ -429,7 +428,6 @@ model=cjs.hessian(model8)
 model8
 ```
 
-CJS: AIC: 108.7434, Phi.(Intercept) -0.07818557, p.(Intercept)   -0.99078187
 
 
 looking at sex and species. phi= apparent survival estimate. p=capture probability (percents) N=population estimate
@@ -504,7 +502,7 @@ mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 ??mark
 ```
 
- AICc { Phi(~1)p(~1) } = 108.91003, Phi:(Intercept) -0.078064, p:(Intercept)   -0.990952
+
 
 
 ```{r}
