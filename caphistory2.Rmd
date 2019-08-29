@@ -472,7 +472,9 @@ Phi.sex = list(formula=~marked_dfCT$sex.fac)
 
 mod1=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
 
-mod2=mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE, options="SIMANNEAL")$results$beta
+#mod2=mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE, options="SIMANNEAL")$results$beta
+
+#THIS RUNS REALLY SLOW. I read in the package doc that Jolly often doesn't run at all, which is why there is the options part in this code. Without it, it won't run at all. With it, it runs, but takes forever and doesn't ever fully converge 
 
 mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
