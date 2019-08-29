@@ -290,6 +290,15 @@ modNMBS$results$reals
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
+
+data(marked_dfCNMBS)
+p.sex = list(formula=~marked_dfNMBS$sex.fac)
+Phi.ct= list(formula=~1)
+p.ct = list(formula=~1)
+Phi.sex = list(formula=~marked_dfNMBS$sex.fac)
+
+mod3=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+
 mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 #mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
