@@ -299,9 +299,9 @@ Phi.ct= list(formula=~1)
 p.ct = list(formula=~1)
 Phi.sex = list(formula=~marked_dfNMBS$sex.fac)
 
-mod3=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mod5=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
-mod4=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mod6=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 #mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
@@ -516,7 +516,7 @@ CT.table <- collect.models(type = "CJS")
 
 
 
-CJS and JS could not be run for any other mark/recap site because there were not enough recaptures.
+CJS and JS could not be run for any other mark/recap site because there were not enough recaptures and I'm not even going to waste my time right now.
 
 
 
