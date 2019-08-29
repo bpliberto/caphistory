@@ -430,7 +430,7 @@ modCT <- crm(marked_dfCT,
         groups = c("sex.fac"), 
         model.parameters=list(N = list(formula = ~sex.fac)))
 
-modCT$results$beta #found online but not sure how to use it
+modCT$results$beta 
 modCT
 
 cjs.hessian(modCT)
@@ -463,13 +463,20 @@ modCT$results$reals
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
-mark(marked_dfCT, model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7) )$results$beta
 
-mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)),output=FALSE, time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), options="SIMANNEAL")$results$beta
+data(marked_dfCT)
+p.sex = list(formula=~marked_dfCT$sex.fac)
+Phi.ct= list(formula=~1)
+p.ct = list(formula=~1)
+Phi.sex = list(formula=~marked_dfCT$sex.fac)
+
+mod1=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+
+mod2=mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE, options="SIMANNEAL")$results$beta
 
 mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
-
+??mark
 ```
 
  AICc { Phi(~1)p(~1) } = 108.91003, Phi:(Intercept) -0.078064, p:(Intercept)   -0.990952
@@ -477,6 +484,8 @@ mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
 ```{r}
 ??Rmark
+
+CT.table <- collect.models(type = "CJS")
 
 ```
 
