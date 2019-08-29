@@ -278,6 +278,11 @@ modNMBS
 modNMBS$results$reals
 ```
 
+```{r}
+#NMBS.table <- collect.models(type = "JS")
+
+#This is supposed to get all the models into a nice table so I can compare AIC values but it isn't working
+```
 
 
 
@@ -285,9 +290,10 @@ modNMBS$results$reals
 
 ```{r}
 MarkPath='C:/Program Files (x86)/MARK'
-mark(marked_dfNMBS, model.parameters=list(N=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
-mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
+#mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
+#This Jolly code doesn't run properly. 
 
 ??RMark
 ```
