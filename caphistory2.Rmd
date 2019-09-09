@@ -213,6 +213,15 @@ model2
 model=cjs.hessian(model2)
 model2
 
+model22=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~1), p= list(formula = ~1)))
+
+model22
+model=cjs.hessian(model22)
+model22
+
 model3=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("species.fac"), 
@@ -231,6 +240,17 @@ model4=crm(marked_dfNMBS,
 model4
 model=cjs.hessian(model4)
 model4
+
+model23=crm(marked_dfNMBS,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("species.fac"), 
+          model.parameters=list(p = list(formula = ~1), Phi = list(formular = ~1)))
+
+
+model23
+model=cjs.hessian(model23)
+model23
+
 ```
 
 CJS: AIC  :  184.6449, Phi.(Intercept) -0.4564347, p.(Intercept)   -1.5498460
@@ -247,19 +267,19 @@ marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
         #model.parameters=list(Phi = list(formula = ~sex.fac), 
                               #p = list(formula = ~1)))
 
-modNMBS <- crm(marked_dfNMBS, 
+modNMBS1 <- crm(marked_dfNMBS, 
         model="JS", 
         groups = c("sex.fac"), 
         model.parameters=list(N = list(formula = ~sex.fac)))
 
-modNMBS$results$beta #found online but not sure how to use it
-modNMBS
+modNMBS1$results$beta #found online but not sure how to use it
+modNMBS1
 
-cjs.hessian(modNMBS)
+cjs.hessian(modNMBS1)
 
-str(modNMBS)
+str(modNMBS1)
 # get values on real scale and not logit or log scales
-modNMBS$results$reals
+modNMBS1$results$reals
 
 
 #modNMBS <- crm(marked_dfNMBS, 
@@ -268,14 +288,35 @@ modNMBS$results$reals
       #  model.parameters=list(Phi = list(formula = ~species.fac),    #should have for one or the other, not both
                            #   p = list(formula = ~species.fac)))
 
-modNMBS <- crm(marked_dfNMBS, 
+modNMBS2 <- crm(marked_dfNMBS, 
                 model="JS", 
                 groups = c("species.fac"), 
                 model.parameters=list(N = list(formula = ~species.fac)))
 
-modNMBS$results$beta 
-modNMBS
-modNMBS$results$reals
+modNMBS2$results$beta 
+modNMBS2
+modNMBS2$results$reals
+cjs.hessian(modNMBS2)
+
+str(modNMBS2)
+# get values on real scale and not logit or log scales
+modNMBS2$results$reals
+
+modNMBS3 <- crm(marked_dfNMBS, 
+                model="JS", 
+                groups = c("species.fac"), 
+                model.parameters=list(N = list(formula = ~species.fac)))
+
+modNMBS3$results$beta 
+modNMBS3
+modNMBS3$results$reals
+
+cjs.hessian(modNMBS3)
+
+str(modNMBS3)
+# get values on real scale and not logit or log scales
+modNMBS3$results$reals
+
 ```
 
 ```{r}
@@ -407,6 +448,15 @@ model6
 model=cjs.hessian(model6)
 model6
 
+model25=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)))
+
+model25
+model=cjs.hessian(model25)
+model25
+
 model7=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("species.fac"), 
@@ -425,6 +475,16 @@ model8=crm(marked_dfCT,
 model8
 model=cjs.hessian(model8)
 model8
+
+model26=crm(marked_dfCT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("species.fac"), 
+          model.parameters=list(p = list(formula = ~1), Phi= list(formula = ~1)))
+
+
+model26
+model=cjs.hessian(model26)
+model26
 ```
 
 
@@ -441,19 +501,19 @@ marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
         #model.parameters=list(Phi = list(formula = ~sex.fac), 
                               #p = list(formula = ~1)))
 
-modCT <- crm(marked_dfCT, 
+modCT1 <- crm(marked_dfCT, 
         model="JS", 
         groups = c("sex.fac"), 
         model.parameters=list(N = list(formula = ~sex.fac)))
 
-modCT$results$beta 
-modCT
+modCT1$results$beta 
+modCT1
 
-cjs.hessian(modCT)
+cjs.hessian(modCT1)
 
-str(modCT)
+str(modCT1)
 # get values on real scale and not logit or log scales
-modCT$results$reals
+modCT1$results$reals
 
 
 #modCT <- crm(marked_dfCT, 
@@ -462,14 +522,23 @@ modCT$results$reals
         #model.parameters=list(Phi = list(formula = ~species.fac), 
                               #p = list(formula = ~species.fac)))
 
-modCT <- crm(marked_dfCT, 
+modCT2 <- crm(marked_dfCT, 
         model="JS", 
         groups = c("species.fac"), 
         model.parameters=list(N = list(formula = ~species.fac)))
 
-modCT$results$beta 
-modCT
-modCT$results$reals
+modCT2$results$beta 
+modCT2
+modCT2$results$reals
+
+modCT3 <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("species.fac"), 
+        model.parameters=list(N = list(formula = ~1)))
+
+modCT3$results$beta 
+modCT3
+modCT3$results$reals
 ```
 
 
