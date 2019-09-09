@@ -203,6 +203,7 @@ model1=crm(marked_dfNMBS,
 model1
 model=cjs.hessian(model1)
 model1
+model1$results$reals
 
 model2=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
@@ -212,6 +213,7 @@ model2=crm(marked_dfNMBS,
 model2
 model=cjs.hessian(model2)
 model2
+model2$results$reals
 
 model22=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
@@ -220,7 +222,7 @@ model22=crm(marked_dfNMBS,
 
 model22
 model=cjs.hessian(model22)
-model22
+model22$results$reals
 
 model3=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
@@ -230,6 +232,7 @@ model3=crm(marked_dfNMBS,
 model3
 model=cjs.hessian(model3)
 model3
+model3$results$reals
 
 model4=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
@@ -240,16 +243,18 @@ model4=crm(marked_dfNMBS,
 model4
 model=cjs.hessian(model4)
 model4
+model4$results$reals
 
 model23=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("species.fac"), 
-          model.parameters=list(p = list(formula = ~1), Phi = list(formular = ~1)))
+          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)))
 
 
 model23
 model=cjs.hessian(model23)
 model23
+model23$results$reals
 
 ```
 
