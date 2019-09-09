@@ -13,7 +13,7 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
 ```{r setup, include=FALSE}
 #knitr::opts_chunk$set(echo = T,
                       #results = "hide") ##This just hides outputs when knitting because it was like 60 pages
-#options(warn=0) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
+options(warn=0) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
 ```
   
   
