@@ -13,7 +13,7 @@ Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent surv
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T,
                       results = "hide") ##This just hides outputs when knitting because it was like 60 pages
-options(warn=-1) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
+options(warn=0) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
 ```
   
   
@@ -291,24 +291,23 @@ modNMBS$results$reals
 # Run with RMark (need to download Program MARK in order for this to work). This is looking at NMBS only
 
 ```{r}
-MarkPath='C:/Program Files (x86)/MARK'
+#MarkPath='C:/Program Files (x86)/MARK'
 
-data(marked_dfCNMBS)
-p.sex = list(formula=~marked_dfNMBS$sex.fac)
-Phi.ct= list(formula=~1)
-p.ct = list(formula=~1)
-Phi.sex = list(formula=~marked_dfNMBS$sex.fac)
+#data(marked_dfCNMBS)
+#p.sex = list(formula=~marked_dfNMBS$sex.fac)
+#Phi.ct= list(formula=~1)
+#p.ct = list(formula=~1)
+#Phi.sex = list(formula=~marked_dfNMBS$sex.fac)
 
-mod5=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+#mod5=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
-mod6=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
+#mod6=mark(marked_dfNMBS, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 #mark(marked_dfNMBS, model.parameters=list(p=list(formula=~species.fac)),output=FALSE, time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9))$results$beta
 
 #mark(marked_dfNMBS, model = "Jolly", model.parameters=list(p=list(formula=~1)),output=FALSE,time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9), options="SIMANNEAL")$results$beta
 #This Jolly code doesn't run properly. 
 
-??RMark
 ```
 
 
@@ -479,36 +478,35 @@ modCT$results$reals
 # Run with RMark (need to download Program MARK in order for this to work). This is looking at CT only
 
 ```{r}
-MarkPath='C:/Program Files (x86)/MARK'
+#MarkPath='C:/Program Files (x86)/MARK'
 
-data(marked_dfCT)
-p.sex = list(formula=~marked_dfCT$sex.fac)
-Phi.ct= list(formula=~1)
-p.ct = list(formula=~1)
-Phi.sex = list(formula=~marked_dfCT$sex.fac)
+#data(marked_dfCT)
+#p.sex = list(formula=~marked_dfCT$sex.fac)
+#Phi.ct= list(formula=~1)
+#p.ct = list(formula=~1)
+#Phi.sex = list(formula=~marked_dfCT$sex.fac)
 
-mod1=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
-mod2=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
-mod3=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
-mod4=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+#mod1=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+#mod2=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.ct), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+#mod3=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.ct, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
+#mod4=mark(marked_dfCT, model = "CJS", model.parameters=list(p=p.sex, Phi=Phi.sex), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE)$results$beta
 
 #mod2=mark(marked_dfCT, model = "Jolly", model.parameters=list(N=list(formula=~1)), time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7), output=FALSE, options="SIMANNEAL")$results$beta
 
 #THIS RUNS REALLY SLOW. I read in the package doc that Jolly often doesn't run at all, which is why there is the options part in this code. Without it, it won't run at all. With it, it runs, but takes forever and doesn't ever fully converge 
 #####
 
-mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
+#mark(marked_dfCT, model.parameters=list(Phi=sex.fac),output=FALSE)$results$beta
 
-??mark
 ```
 
 
 
 
 ```{r}
-??Rmark
+#??Rmark
 
-CT.table <- collect.models(type = "CJS")
+#CT.table <- collect.models(type = "CJS")
 
 ```
 
