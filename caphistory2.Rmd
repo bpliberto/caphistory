@@ -11,9 +11,9 @@ editor_options:
 Using CJS and JS. JS -> for population estimates. CJS -> for time-dependent survival and recapture rates of a given species 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = T,
-                      results = "hide") ##This just hides outputs when knitting because it was like 60 pages
-options(warn=0) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
+#knitr::opts_chunk$set(echo = T,
+                      #results = "hide") ##This just hides outputs when knitting because it was like 60 pages
+#options(warn=0) ##This hides warnings, again, just really for knitting. Can be turned back on with warn=0
 ```
   
   
