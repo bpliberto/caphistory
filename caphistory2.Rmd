@@ -443,6 +443,7 @@ model5=crm(marked_dfCT,
 model5
 model=cjs.hessian(model5)
 model5
+model5$results$reals
 
 model6=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -452,6 +453,7 @@ model6=crm(marked_dfCT,
 model6
 model=cjs.hessian(model6)
 model6
+model6$results$reals
 
 model25=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -461,6 +463,7 @@ model25=crm(marked_dfCT,
 model25
 model=cjs.hessian(model25)
 model25
+model25$results$reals
 
 model7=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -470,6 +473,7 @@ model7=crm(marked_dfCT,
 model7
 model=cjs.hessian(model7)
 model7
+model7$results$reals
 
 model8=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -480,6 +484,7 @@ model8=crm(marked_dfCT,
 model8
 model=cjs.hessian(model8)
 model8
+model8$results$reals
 
 model26=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -490,6 +495,7 @@ model26=crm(marked_dfCT,
 model26
 model=cjs.hessian(model26)
 model26
+model26$results$reals
 ```
 
 
