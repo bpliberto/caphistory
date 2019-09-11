@@ -275,6 +275,7 @@ marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
 modNMBS1 <- crm(marked_dfNMBS, 
         model="JS", 
         groups = c("sex.fac"), 
+        time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
         model.parameters=list(N = list(formula = ~sex.fac)))
 
 modNMBS1$results$beta #found online but not sure how to use it
@@ -296,6 +297,7 @@ modNMBS1$results$reals
 modNMBS2 <- crm(marked_dfNMBS, 
                 model="JS", 
                 groups = c("species.fac"), 
+                time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
                 model.parameters=list(N = list(formula = ~species.fac)))
 
 modNMBS2$results$beta 
@@ -310,6 +312,7 @@ modNMBS2$results$reals
 modNMBS3 <- crm(marked_dfNMBS, 
                 model="JS", 
                 groups = c("species.fac"), 
+                time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
                 model.parameters=list(N = list(formula = ~species.fac)))
 
 modNMBS3$results$beta 
@@ -515,6 +518,7 @@ marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
 modCT1 <- crm(marked_dfCT, 
         model="JS", 
         groups = c("sex.fac"), 
+        time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
         model.parameters=list(N = list(formula = ~sex.fac)))
 
 modCT1$results$beta 
@@ -536,6 +540,7 @@ modCT1$results$reals
 modCT2 <- crm(marked_dfCT, 
         model="JS", 
         groups = c("species.fac"), 
+        time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
         model.parameters=list(N = list(formula = ~species.fac)))
 
 modCT2$results$beta 
@@ -545,6 +550,7 @@ modCT2$results$reals
 modCT3 <- crm(marked_dfCT, 
         model="JS", 
         groups = c("species.fac"), 
+        time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
         model.parameters=list(N = list(formula = ~1)))
 
 modCT3$results$beta 
