@@ -198,7 +198,8 @@ marked_dfNMBS$species.fac <- as.factor(marked_dfNMBS$species)
 model1=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("sex.fac"), 
-          model.parameters=list(Phi = list(formula = ~sex.fac)))
+          model.parameters=list(Phi = list(formula = ~sex.fac)),
+          hessian=TRUE)
 
 model1
 model=cjs.hessian(model1)
@@ -208,7 +209,8 @@ model1$results$reals
 model2=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("sex.fac"), 
-          model.parameters=list(p = list(formula = ~sex.fac)))
+          model.parameters=list(p = list(formula = ~sex.fac)),
+          hessian=TRUE)
 
 model2
 model=cjs.hessian(model2)
@@ -218,7 +220,8 @@ model2$results$reals
 model22=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("sex.fac"), 
-          model.parameters=list(Phi = list(formula = ~1), p= list(formula = ~1)))
+          model.parameters=list(Phi = list(formula = ~1), p= list(formula = ~1)),
+          hessian=TRUE)
 
 model22
 model=cjs.hessian(model22)
@@ -227,7 +230,8 @@ model22$results$reals
 model3=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("species.fac"), 
-          model.parameters=list(Phi = list(formula = ~species.fac)))
+          model.parameters=list(Phi = list(formula = ~species.fac)),
+          hessian=TRUE)
 
 model3
 model=cjs.hessian(model3)
@@ -237,7 +241,8 @@ model3$results$reals
 model4=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("species.fac"), 
-          model.parameters=list(p = list(formula = ~species.fac)))
+          model.parameters=list(p = list(formula = ~species.fac)),
+          hessian=TRUE)
 
 
 model4
@@ -248,7 +253,8 @@ model4$results$reals
 model23=crm(marked_dfNMBS,  
           time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
           groups = c("species.fac"), 
-          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)))
+          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)),
+          hessian=TRUE)
 
 
 model23
@@ -276,7 +282,8 @@ modNMBS1 <- crm(marked_dfNMBS,
         model="JS", 
         groups = c("sex.fac"), 
         time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
-        model.parameters=list(N = list(formula = ~sex.fac)))
+        model.parameters=list(N = list(formula = ~sex.fac)),
+        hessian=TRUE)
 
 modNMBS1$results$beta #found online but not sure how to use it
 modNMBS1
@@ -298,7 +305,8 @@ modNMBS2 <- crm(marked_dfNMBS,
                 model="JS", 
                 groups = c("species.fac"), 
                 time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
-                model.parameters=list(N = list(formula = ~species.fac)))
+                model.parameters=list(N = list(formula = ~species.fac)),
+                hessian=TRUE)
 
 modNMBS2$results$beta 
 modNMBS2
@@ -313,7 +321,8 @@ modNMBS3 <- crm(marked_dfNMBS,
                 model="JS", 
                 groups = c("species.fac"), 
                 time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
-                model.parameters=list(N = list(formula = ~species.fac)))
+                model.parameters=list(N = list(formula = ~species.fac)),
+                hessian=TRUE)
 
 modNMBS3$results$beta 
 modNMBS3
@@ -441,7 +450,8 @@ marked_dfCT$species.fac <- as.factor(marked_dfCT$species)
 model5=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("sex.fac"), 
-          model.parameters=list(Phi = list(formula = ~sex.fac)))
+          model.parameters=list(Phi = list(formula = ~sex.fac)),
+          hessian=TRUE)
 
 model5
 model=cjs.hessian(model5)
@@ -451,7 +461,8 @@ model5$results$reals
 model6=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("sex.fac"), 
-          model.parameters=list(p = list(formula = ~sex.fac)))
+          model.parameters=list(p = list(formula = ~sex.fac)),
+          hessian=TRUE)
 
 model6
 model=cjs.hessian(model6)
@@ -461,7 +472,8 @@ model6$results$reals
 model25=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("sex.fac"), 
-          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)))
+          model.parameters=list(p = list(formula = ~1), Phi = list(formula = ~1)),
+          hessian=TRUE)
 
 model25
 model=cjs.hessian(model25)
@@ -471,7 +483,8 @@ model25$results$reals
 model7=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("species.fac"), 
-          model.parameters=list(Phi = list(formula = ~species.fac)))
+          model.parameters=list(Phi = list(formula = ~species.fac)),
+          hessian=TRUE)
 
 model7
 model=cjs.hessian(model7)
@@ -481,7 +494,8 @@ model7$results$reals
 model8=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("species.fac"), 
-          model.parameters=list(p = list(formula = ~species.fac)))
+          model.parameters=list(p = list(formula = ~species.fac)),
+          hessian=TRUE)
 
 
 model8
@@ -492,7 +506,8 @@ model8$results$reals
 model26=crm(marked_dfCT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("species.fac"), 
-          model.parameters=list(p = list(formula = ~1), Phi= list(formula = ~1)))
+          model.parameters=list(p = list(formula = ~1), Phi= list(formula = ~1)),
+          hessian=TRUE)
 
 
 model26
@@ -519,7 +534,8 @@ modCT1 <- crm(marked_dfCT,
         model="JS", 
         groups = c("sex.fac"), 
         time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
-        model.parameters=list(N = list(formula = ~sex.fac)))
+        model.parameters=list(N = list(formula = ~sex.fac)),
+        hessian=TRUE)
 
 modCT1$results$beta 
 modCT1
@@ -541,7 +557,8 @@ modCT2 <- crm(marked_dfCT,
         model="JS", 
         groups = c("species.fac"), 
         time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
-        model.parameters=list(N = list(formula = ~species.fac)))
+        model.parameters=list(N = list(formula = ~species.fac)),
+        hessian=TRUE)
 
 modCT2$results$beta 
 modCT2
@@ -551,7 +568,8 @@ modCT3 <- crm(marked_dfCT,
         model="JS", 
         groups = c("species.fac"), 
         time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
-        model.parameters=list(N = list(formula = ~1)))
+        model.parameters=list(N = list(formula = ~1)),
+        hessian=TRUE)
 
 modCT3$results$beta 
 modCT3
