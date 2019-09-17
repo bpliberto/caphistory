@@ -640,6 +640,9 @@ capC$ch <- paste(capC$c1,
                 capC$c7,
                 capC$c8,
                 capC$c9,
+                capC$c10,
+                capC$c11,
+                capC$c12,
                 " ",
                 ";",
                 sep="")
@@ -685,7 +688,10 @@ marked_dfC$ch <- paste0(capC$c1,
                 capC$c6,
                 capC$c7,
                 capC$c8,
-                capC$c9)
+                capC$c9,
+                capC$c10,
+                capC$c11,
+                capC$c12)
              
 marked_dfC$sex.fac <- as.factor(marked_dfC$sex)
 marked_dfC$species.fac <- as.factor(marked_dfC$species)
@@ -702,14 +708,26 @@ model=cjs.hessian(modelC1)
 modelC1
 modelC1$results$reals
 
+modelC2=crm(marked_dfC,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~sex.fac)),
+          hessian=TRUE)
+
+modelC2
+model=cjs.hessian(modelC2)
+modelC2
+modelC2$results$reals
+
 #JS
 
-modC2 <- crm(marked_dfC, 
+modC3 <- crm(marked_dfC, 
         model="JS", 
         groups = c("sex.fac"), 
         time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
         model.parameters=list(N = list(formula = ~sex.fac)),
         hessian=TRUE)
+modC3$results$reals
 
 ```
 
