@@ -616,6 +616,104 @@ modCT3$results$reals
 
 
 
+
+For just crimsons at NMBS
+```{r}
+
+capC <- read.csv("capturehistoryCrimsonsNMBS.csv", stringsAsFactors = F)
+str(capC)
+print(capC)
+summary(capC)
+capC <- capC[which(!is.na(capC$c1)), ]
+summary(capC)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capC$ch <- paste(capC$c1,
+                capC$c2,
+                capC$c3,
+                capC$c4,
+                capC$c5,
+                capC$c6,
+                capC$c7,
+                capC$c8,
+                capC$c9,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capC)
+data
+transform=melt(capC, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfC <- capC
+
+marked_dfC$ch <- paste0(capC$c1,
+                capC$c2,
+                capC$c3,
+                capC$c4,
+                capC$c5,
+                capC$c6,
+                capC$c7,
+                capC$c8,
+                capC$c9)
+             
+marked_dfC$sex.fac <- as.factor(marked_dfC$sex)
+marked_dfC$species.fac <- as.factor(marked_dfC$species)
+
+#CJS
+modelC1=crm(marked_dfC,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~sex.fac)),
+          hessian=TRUE)
+
+modelC1
+model=cjs.hessian(modelC1)
+modelC1
+modelC1$results$reals
+
+#JS
+
+modC2 <- crm(marked_dfC, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+        model.parameters=list(N = list(formula = ~sex.fac)),
+        hessian=TRUE)
+
+```
+
+
 CJS and JS could not be run for any other mark/recap site because there were not enough recaptures and I'm not even going to waste my time right now.
 
 
