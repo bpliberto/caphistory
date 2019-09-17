@@ -735,4 +735,105 @@ modC3$results$reals
 CJS and JS could not be run for any other mark/recap site because there were not enough recaptures and I'm not even going to waste my time right now.
 
 
+```{r}
+capT <- read.csv("capturehistoryCTHud.csv", stringsAsFactors = F)
+str(capT)
+print(capT)
+summary(capT)
+capT <- capT[which(!is.na(capT$c1)), ]
+summary(capT)
+
+library(reshape)
+## Format data for MARK
+
+# get data formatted for MARK/RMark
+capT$ch <- paste(capT$c1,
+                capT$c2,
+                capT$c3,
+                capT$c4,
+                capT$c5,
+                capT$c6,
+                capT$c7,
+                capT$c8,
+                capT$c9,
+                " ",
+                ";",
+                sep="")
+
+
+data=data.frame(capT)
+data
+transform=melt(capT, id.vars="mark.number")
+pivot=cast(transform, mark.number ~ value)
+pivot[is.na(pivot)]=0
+
+pivot[,2:ncol(pivot)][pivot[,2:ncol(pivot)] != 0] = 1
+lh <- 11;
+
+
+pivot$eh <- apply(pivot[2:lh],1,paste,collapse="") # concatenates encounter columns into eh
+pivot[2:lh] <- NULL # drops individual encounter columns
+# create commented tag
+pivot$mark.number <- paste("/*", pivot$mark.number, "*/", sep=" ")
+# sort by descending encounter histories
+pivot <- pivot[order(data$ch,decreasing=TRUE),]
+# tack on the frequency for the individual
+pivot$end <- "1;";
+# write out the input file
+write.table(pivot,file="cjs-pivot.inp",sep=" ",quote=F,col.names=F,row.names=F);
+
+pivot
+
+```
+
+
+
+```{r}
+## Format data for marked package
+
+marked_dfT <- capT
+
+marked_dfT$ch <- paste0(capT$c1,
+                capT$c2,
+                capT$c3,
+                capC$c4,
+                capT$c5,
+                capT$c6,
+                capT$c7,
+                capT$c8,
+                capT$c9)
+
+
+marked_dfT$sex.fac <- as.factor(marked_dfCT$sex)
+marked_dfT$species.fac <- as.factor(marked_dfCT$species)
+
+model5=crm(marked_dfT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~sex.fac)),
+          hessian=TRUE)
+
+model5
+model=cjs.hessian(model5)
+model5
+model5$results$reals
+
+modT1 <- crm(marked_dfCT, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+        model.parameters=list(N = list(formula = ~sex.fac)),
+        hessian=TRUE)
+
+modT1$results$beta 
+modT1
+
+cjs.hessian(modT1)
+
+str(modT1)
+# get values on real scale and not logit or log scales
+modT1$results$reals
+
+
+```
 
