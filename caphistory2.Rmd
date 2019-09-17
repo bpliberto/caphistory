@@ -719,6 +719,17 @@ model=cjs.hessian(modelC2)
 modelC2
 modelC2$results$reals
 
+modelC4=crm(marked_dfC,  
+          time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~1), Phi = (list(formula = ~1))),
+          hessian=TRUE)
+
+modelC4
+model=cjs.hessian(modelC4)
+modelC4
+modelC4$results$reals
+
 #JS
 
 modC3 <- crm(marked_dfC, 
@@ -729,12 +740,20 @@ modC3 <- crm(marked_dfC,
         hessian=TRUE)
 modC3$results$reals
 
+modC4 <- crm(marked_dfC, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        time.intervals = c(23, 4, 9, 2, 4, 15, 9, 1, 2, 7, 9),
+        model.parameters=list(N = list(formula = ~1)),
+        hessian=TRUE)
+modC4$results$reals
+
 ```
 
 
 CJS and JS could not be run for any other mark/recap site because there were not enough recaptures and I'm not even going to waste my time right now.
 
-
+Hudsonians at CT
 ```{r}
 capT <- read.csv("capturehistoryCTHud.csv", stringsAsFactors = F)
 str(capT)
@@ -807,17 +826,42 @@ marked_dfT$ch <- paste0(capT$c1,
 marked_dfT$sex.fac <- as.factor(marked_dfT$sex)
 marked_dfT$species.fac <- as.factor(marked_dfT$species)
 
-model5=crm(marked_dfT,  
+
+#CJS
+modelT5=crm(marked_dfT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
           groups = c("sex.fac"), 
           model.parameters=list(Phi = list(formula = ~sex.fac)),
           hessian=TRUE)
 
-model5
-model=cjs.hessian(model5)
-model5
-model5$results$reals
+modelT5
+model=cjs.hessian(modelT5)
+modelT5
+modelT5$results$reals
 
+modelT7=crm(marked_dfT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(p = list(formula = ~sex.fac)),
+          hessian=TRUE)
+
+modelT7
+model=cjs.hessian(modelT7)
+modelT7
+modelT7$results$reals
+
+modelT6=crm(marked_dfT,  
+          time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+          groups = c("sex.fac"), 
+          model.parameters=list(Phi = list(formula = ~1), p = list(formula=~1)),
+          hessian=TRUE)
+
+modelT6
+model=cjs.hessian(modelT6)
+modelT6
+modelT6$results$reals
+
+#JS
 modT1 <- crm(marked_dfT, 
         model="JS", 
         groups = c("sex.fac"), 
@@ -833,6 +877,22 @@ cjs.hessian(modT1)
 str(modT1)
 # get values on real scale and not logit or log scales
 modT1$results$reals
+
+modT2 <- crm(marked_dfT, 
+        model="JS", 
+        groups = c("sex.fac"), 
+        time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
+        model.parameters=list(N = list(formula = ~1)),
+        hessian=TRUE)
+
+modT2$results$beta 
+modT2
+
+cjs.hessian(modT2)
+
+str(modT2)
+# get values on real scale and not logit or log scales
+modT2$results$reals
 
 
 ```
