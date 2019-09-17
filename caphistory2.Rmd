@@ -796,7 +796,7 @@ marked_dfT <- capT
 marked_dfT$ch <- paste0(capT$c1,
                 capT$c2,
                 capT$c3,
-                capC$c4,
+                capT$c4,
                 capT$c5,
                 capT$c6,
                 capT$c7,
@@ -804,8 +804,8 @@ marked_dfT$ch <- paste0(capT$c1,
                 capT$c9)
 
 
-marked_dfT$sex.fac <- as.factor(marked_dfCT$sex)
-marked_dfT$species.fac <- as.factor(marked_dfCT$species)
+marked_dfT$sex.fac <- as.factor(marked_dfT$sex)
+marked_dfT$species.fac <- as.factor(marked_dfT$species)
 
 model5=crm(marked_dfT,  
           time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
@@ -818,7 +818,7 @@ model=cjs.hessian(model5)
 model5
 model5$results$reals
 
-modT1 <- crm(marked_dfCT, 
+modT1 <- crm(marked_dfT, 
         model="JS", 
         groups = c("sex.fac"), 
         time.intervals = c(7, 8, 6, 7, 4, 9, 3, 7),
