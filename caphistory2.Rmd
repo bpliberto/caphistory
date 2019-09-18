@@ -894,6 +894,5 @@ str(modT2)
 # get values on real scale and not logit or log scales
 modT2$results$reals
 
-
 ```
 
