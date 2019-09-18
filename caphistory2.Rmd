@@ -750,7 +750,7 @@ modC4$results$reals
 
 ```
 
-#####revised cap hist for NMBS#######
+#####revised cap hist for NMBS Crimsons#######
 ```{r}
 
 capC <- read.csv("capturehistoryCrimsonsNMBS2.csv", stringsAsFactors = F)
