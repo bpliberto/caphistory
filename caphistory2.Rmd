@@ -863,6 +863,7 @@ modC3 <- crm(marked_dfC,
         time.intervals = c(4, 15, 9, 1, 2, 7, 9),
         model.parameters=list(N = list(formula = ~sex.fac)),
         hessian=TRUE)
+modC3
 modC3$results$reals
 
 modC4 <- crm(marked_dfC, 
@@ -871,6 +872,7 @@ modC4 <- crm(marked_dfC,
         time.intervals = c(4, 15, 9, 1, 2, 7, 9),
         model.parameters=list(N = list(formula = ~1)),
         hessian=TRUE)
+modC4
 modC4$results$reals
 
 ```
