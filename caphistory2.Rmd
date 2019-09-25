@@ -47,6 +47,7 @@ mod13<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic)
 mod14<-glm(data$adjusted.abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
 mod15<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
 mod16<-glm(data$adjusted.abundance~data$lenticlotic*data$openwater)
+mod17<-glm(data$adjusted.abundance~data$pH*data$openwater)
 
 
 
@@ -66,7 +67,7 @@ AIC(mod13, k=2)
 AIC(mod14, k=2) #### Chicken dinner  #####
 AIC(mod15, k=2) #### Almost the same, 0.1258 difference ####
 AIC(mod16, k=2)
-
+AIC(mod17, k=2)
 
 ```
 
