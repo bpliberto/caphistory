@@ -116,6 +116,49 @@ AIC(mod16, k=2)
 
 ```
 
+Nymph Abundance
+```{r}
+ata <- read.csv("NymphAbund.csv", stringsAsFactors = F)
+
+### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
+mod1<-glm(data$Abundance~data$pH)
+mod2<-glm(data$Abundance~data$elevation)
+mod3<-glm(data$Abundance~data$fishpresence)
+mod4<-glm(data$Abundance~data$lenticlotic)  
+mod5<-glm(data$Abundance~data$openwater)
+mod6<-glm(data$Abundance~data$pH*data$elevation)
+mod7<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence)
+mod8<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
+mod9<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater) 
+mod10<-glm(data$Abundance~data$elevation*data$fishpresence)
+mod11<-glm(data$Abundance~data$elevation*data$fishpresence*data$lenticlotic)
+mod12<-glm(data$Abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
+mod13<-glm(data$Abundance~data$fishpresence*data$lenticlotic)
+mod14<-glm(data$Abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
+mod15<-glm(data$Abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
+mod16<-glm(data$Abundance~data$lenticlotic*data$openwater)
+mod17<-glm(data$Abundance~data$pH*data$openwater)
+
+
+
+AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2, k=2)
+AIC(mod3, k=2)
+AIC(mod4, k=2) 
+AIC(mod5, k=2)
+AIC(mod6, k=2)
+AIC(mod7, k=2)
+AIC(mod8, k=2)
+AIC(mod9, k=2) 
+AIC(mod10, k=2)
+AIC(mod11, k=2)
+AIC(mod12, k=2)
+AIC(mod13, k=2)
+AIC(mod14, k=2) 
+AIC(mod15, k=2) #### Chicken dinner  #####
+AIC(mod16, k=2)
+AIC(mod17, k=2)
+```
 
 
 these are all the JS and CJS for each location. Starting with NMBS
