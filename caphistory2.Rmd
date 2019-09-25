@@ -118,26 +118,26 @@ AIC(mod16, k=2)
 
 Nymph Abundance
 ```{r}
-ata <- read.csv("NymphAbund.csv", stringsAsFactors = F)
+ata <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(data$Abundance~data$pH)
-mod2<-glm(data$Abundance~data$elevation)
-mod3<-glm(data$Abundance~data$fishpresence)
-mod4<-glm(data$Abundance~data$lenticlotic)  
-mod5<-glm(data$Abundance~data$openwater)
-mod6<-glm(data$Abundance~data$pH*data$elevation)
-mod7<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence)
-mod8<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
-mod9<-glm(data$Abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater) 
-mod10<-glm(data$Abundance~data$elevation*data$fishpresence)
-mod11<-glm(data$Abundance~data$elevation*data$fishpresence*data$lenticlotic)
-mod12<-glm(data$Abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
-mod13<-glm(data$Abundance~data$fishpresence*data$lenticlotic)
-mod14<-glm(data$Abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
-mod15<-glm(data$Abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
-mod16<-glm(data$Abundance~data$lenticlotic*data$openwater)
-mod17<-glm(data$Abundance~data$pH*data$openwater)
+mod1<-glm(data$abundance~data$pH)
+mod2<-glm(data$abundance~data$elevation)
+mod3<-glm(data$abundance~data$fishpresence)
+mod4<-glm(data$abundance~data$lenticlotic)  
+mod5<-glm(data$abundance~data$openwater)
+mod6<-glm(data$abundance~data$pH*data$elevation)
+mod7<-glm(data$abundance~data$pH*data$elevation*data$fishpresence)
+mod8<-glm(data$abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
+mod9<-glm(data$abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater) 
+mod10<-glm(data$abundance~data$elevation*data$fishpresence)
+mod11<-glm(data$abundance~data$elevation*data$fishpresence*data$lenticlotic)
+mod12<-glm(data$abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
+mod13<-glm(data$abundance~data$fishpresence*data$lenticlotic)
+mod14<-glm(data$abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
+mod15<-glm(data$abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
+mod16<-glm(data$abundance~data$lenticlotic*data$openwater)
+mod17<-glm(data$abundance~data$pH*data$openwater)
 
 
 
