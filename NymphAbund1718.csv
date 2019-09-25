@@ -1,4 +1,4 @@
-Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,darnerprop,openwater,Taxa count,Abundance,Area sampled
+Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,darnerprop,openwater,Taxa count,abundance,Area sampled
 Cranesville MCRB,nymph,CMCRBn,6.97,776,2,2,0.666666667,1388,2,3,
 Cranesville N Farm Pond,nymph,CNFPn,7.22,786,2,1,0,761,1,4,
 Cranesville Powerlines,nymph,CPn,6.97,777,2,2,0,2981,4,16,
