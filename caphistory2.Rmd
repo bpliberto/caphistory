@@ -118,7 +118,7 @@ AIC(mod16, k=2)
 
 Nymph Abundance
 ```{r}
-ata <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
+data <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
 mod1<-glm(data$abundance~data$pH)
