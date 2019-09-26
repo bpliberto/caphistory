@@ -76,6 +76,8 @@ scatterplot of amount of open water and abundances for wetlands for 2017 and 201
 ```{r}
 library(ggplot2)
 ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point()
+
+ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point()
 ```
 
 
