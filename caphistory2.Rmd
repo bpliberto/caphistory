@@ -32,23 +32,23 @@ abundance/effort AIC vvvv
 dataA <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(data$adjusted.abundance~data$pH)
-mod2<-glm(data$adjusted.abundance~data$elevation)
-mod3<-glm(data$adjusted.abundance~data$fishpresence)
-mod4<-glm(data$adjusted.abundance~data$lenticlotic)  
-mod5<-glm(data$adjusted.abundance~data$openwater)
-mod6<-glm(data$adjusted.abundance~data$pH*data$elevation)
-mod7<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence)
-mod8<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
-mod9<-glm(data$adjusted.abundance~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater) 
-mod10<-glm(data$adjusted.abundance~data$elevation*data$fishpresence)
-mod11<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic)
-mod12<-glm(data$adjusted.abundance~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
-mod13<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic)
-mod14<-glm(data$adjusted.abundance~data$fishpresence*data$openwater) #### Chicken dinner  #####
-mod15<-glm(data$adjusted.abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
-mod16<-glm(data$adjusted.abundance~data$lenticlotic*data$openwater)
-mod17<-glm(data$adjusted.abundance~data$pH*data$openwater)
+mod1<-glm(dataA$adjusted.abundance~dataA$pH)
+mod2<-glm(dataA$adjusted.abundance~dataA$elevation)
+mod3<-glm(dataA$adjusted.abundance~dataA$fishpresence)
+mod4<-glm(dataA$adjusted.abundance~dataA$lenticlotic)  
+mod5<-glm(dataA$adjusted.abundance~dataA$openwater)
+mod6<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation)
+mod7<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence)
+mod8<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic)
+mod9<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater) 
+mod10<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence)
+mod11<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic)
+mod12<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater)
+mod13<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic)
+mod14<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$openwater) #### Chicken dinner  #####
+mod15<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic*dataA$openwater) #### Almost the same ####
+mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater)
+mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater)
 
 
 
