@@ -159,6 +159,7 @@ mod14<-glm(data$abundance~data$fishpresence*data$openwater) #### Chicken dinner 
 mod15<-glm(data$abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
 mod16<-glm(data$abundance~data$lenticlotic*data$openwater)
 mod17<-glm(data$abundance~data$pH*data$openwater)
+mod18<- glm(data$abundance~data$pH*data$openwater*data$conductivity)
 
 
 
