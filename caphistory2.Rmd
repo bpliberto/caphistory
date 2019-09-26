@@ -28,7 +28,7 @@ abundance/effort AIC vvvv
 
 ```{r}
 
-data <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
+dataA <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
 mod1<-glm(data$adjusted.abundance~data$pH)
@@ -72,6 +72,11 @@ AIC(mod17, k=2)
 ```
 
 
+scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
+```{r}
+library(ggplot2)
+ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point()
+```
 
 
 richness (just to see) vvvvv
@@ -203,6 +208,9 @@ AIC(mod15, k=2) #### Chicken dinner  #####
 AIC(mod16, k=2)
 AIC(mod17, k=2)
 ```
+
+
+
 
 these are all the JS and CJS for each location. Starting with NMBS
 ```{r}
