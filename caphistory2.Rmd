@@ -76,7 +76,7 @@ AIC(mod17, k=2)
 scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
 ```{r}
 library(ggplot2)
-adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water (m^2)") + ylab("Abundance") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 adultabund + 
   geom_label_repel(aes(label = ID),
                   box.padding   = 0.35, 
@@ -84,7 +84,8 @@ adultabund +
                   segment.color = 'grey50') +
   theme_classic()
 
-adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+
+adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("Area of Open Water (m^2)") + ylab("Richness") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 adultrich + 
   geom_label_repel(aes(label = ID),
                   box.padding   = 0.35, 
@@ -184,7 +185,7 @@ scatter plot for open water
 ```{r}
 library(ggplot2)
 library(ggrepel)
-nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() + xlab("Area of Open Water (m^2)") + ylab("Abundance") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 nymphabund + 
   geom_label_repel(aes(label = ID),
@@ -193,7 +194,7 @@ nymphabund +
                   segment.color = 'grey50') +
   theme_classic()
 
-nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point() #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point() + xlab("Area of Open Water (m^2)") + ylab("Richness") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 nymphrich + 
   geom_label_repel(aes(label = ID),
                   box.padding   = 0.35, 
