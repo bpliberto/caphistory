@@ -125,7 +125,7 @@ AIC(mod16, k=2)
 
 Nymph Abundance 2018
 ```{r}
-data <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
+dataB <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
 mod1<-glm(data$abundance~data$pH)
@@ -166,6 +166,19 @@ AIC(mod15, k=2) #### Chicken dinner  #####
 AIC(mod16, k=2)
 AIC(mod17, k=2)
 ```
+
+scatter plot for open water
+```{r}
+library(ggplot2)
+ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point()
+
+ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point()
+```
+
+
+
+
+
 
 2017 and 2018
 ```{r}
