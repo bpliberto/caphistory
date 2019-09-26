@@ -51,7 +51,6 @@ mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater)
 mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater)
 
 
-
 AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
 AIC(mod2, k=2)
 AIC(mod3, k=2)
@@ -159,7 +158,7 @@ mod14<-glm(dataB$abundance~dataB$fishpresence*dataB$openwater) #### Chicken dinn
 mod15<-glm(dataB$abundance~dataB$fishpresence*dataB$lenticlotic*dataB$openwater) #### Almost the same ####
 mod16<-glm(dataB$abundance~dataB$lenticlotic*dataB$openwater)
 mod17<-glm(dataB$abundance~dataB$pH*dataB$openwater)
-mod18<- glm(dataB$abundance~dataB$conductivity)
+mod18<- glm(dataB$abundance~dataB$pH*dataB$conductivity)
 
 
 
@@ -233,7 +232,7 @@ mod14<-glm(data$abundance~data$fishpresence*data$openwater) #### Chicken dinner 
 mod15<-glm(data$abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
 mod16<-glm(data$abundance~data$lenticlotic*data$openwater)
 mod17<-glm(data$abundance~data$pH*data$openwater)
-
+mod17<-glm(data$abundance~data$pH*data$openwater)
 
 
 AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
