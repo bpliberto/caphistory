@@ -216,7 +216,7 @@ data_summary <- function(nondragonflyabundace) {
    ymax <- m+sd(nondragonflyabundace)
    return(c(y=m,ymin=ymin,ymax=ymax))
 }
-dataB$nondragonflyabundance <- as.factor(dataB$nondragonflyabundance)
+dataB$openwatersizem2 <- as.factor(dataB$openwatersizem2)
 head(dataB)
 p <- ggplot(dataB, aes(x=openwatersizem2, y=nondragonflyabundance)) + 
   geom_violin()
