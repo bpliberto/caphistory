@@ -203,12 +203,26 @@ nymphrich +
                   segment.color = 'grey50') +
   theme_classic()
 
+
+p <- ggplot(dataB, aes(x=openwatersizem2, y=nondragonflyabundance)) + 
+    geom_violin(trim=FALSE)
+p + stat_summary(fun.data="mean_sdl", mult=1, 
+                 geom="crossbar", width=0.2 )
+p + stat_summary(fun.data=mean_sdl, mult=1, 
+                 geom="pointrange", color="red")
+data_summary <- function(nondragonflyabundace) {
+   m <- mean(nondragonflyabundace)
+   ymin <- m-sd(nondragonflyabundace)
+   ymax <- m+sd(nondragonflyabundace)
+   return(c(y=m,ymin=ymin,ymax=ymax))
+}
 dataB$nondragonflyabundance <- as.factor(dataB$nondragonflyabundance)
 head(dataB)
-p <- ggplot(dataB, aes(x=richness, y=abundance)) + 
+p <- ggplot(dataB, aes(x=openwatersizem2, y=nondragonflyabundance)) + 
   geom_violin()
 p
 
+p + stat_summary(fun.data=data_summary)
 ```
 
 
