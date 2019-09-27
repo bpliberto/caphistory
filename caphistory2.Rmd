@@ -203,6 +203,10 @@ nymphrich +
                   segment.color = 'grey50') +
   theme_classic()
 
+p <- ggplot(dataB, aes(x=nondragonflyabundance, y=abundance)) + 
+  geom_violin()
+p
+
 ```
 
 
