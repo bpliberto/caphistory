@@ -205,7 +205,7 @@ nymphrich +
 
 dataB$nondragonflyabundance <- as.factor(dataB$nondragonflyabundance)
 head(dataB)
-p <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + 
+p <- ggplot(dataB, aes(x=richness, y=abundance)) + 
   geom_violin()
 p
 
