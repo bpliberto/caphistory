@@ -51,23 +51,23 @@ mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater)
 mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater)
 
 
-AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2, k=2)
-AIC(mod3, k=2)
-AIC(mod4, k=2) 
-AIC(mod5, k=2)
-AIC(mod6, k=2)
-AIC(mod7, k=2)
-AIC(mod8, k=2)
-AIC(mod9, k=2) 
-AIC(mod10, k=2)
-AIC(mod11, k=2)
-AIC(mod12, k=2)
-AIC(mod13, k=2)
-AIC(mod14, k=2) #### Chicken dinner  #####
-AIC(mod15, k=2) #### Almost the same, 0.1258 difference ####
-AIC(mod16, k=2)
-AIC(mod17, k=2)
+AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2)
+AIC(mod3)
+AIC(mod4) 
+AIC(mod5)
+AIC(mod6)
+AIC(mod7)
+AIC(mod8)
+AIC(mod9) 
+AIC(mod10)
+AIC(mod11)
+AIC(mod12)
+AIC(mod13)
+AIC(mod14) #### Chicken dinner  #####
+AIC(mod15) #### Almost the same, 0.1258 difference ####
+AIC(mod16)
+AIC(mod17)
 
 ```
 
@@ -117,22 +117,22 @@ mod16<-glm(data$Richness~data$lenticlotic*data$openwater)
 
 
 
-AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2, k=2)
-AIC(mod3, k=2)
-AIC(mod4, k=2) #### Chicken dinner  #####
-AIC(mod5, k=2)
-AIC(mod6, k=2)
-AIC(mod7, k=2)
-AIC(mod8, k=2)
-AIC(mod9, k=2)
-AIC(mod10, k=2)
-AIC(mod11, k=2)
-AIC(mod12, k=2)
-AIC(mod13, k=2)
-AIC(mod14, k=2)
-AIC(mod15, k=2)
-AIC(mod16, k=2)
+AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2)
+AIC(mod3)
+AIC(mod4) #### Chicken dinner  #####
+AIC(mod5)
+AIC(mod6)
+AIC(mod7)
+AIC(mod8)
+AIC(mod9)
+AIC(mod10)
+AIC(mod11)
+AIC(mod12)
+AIC(mod13)
+AIC(mod14)
+AIC(mod15)
+AIC(mod16)
 
 ```
 
@@ -162,24 +162,24 @@ mod18<- glm(dataB$abundance~dataB$pH*dataB$conductivity)
 
 
 
-AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2, k=2)
-AIC(mod3, k=2)
-AIC(mod4, k=2) 
-AIC(mod5, k=2)
-AIC(mod6, k=2)
-AIC(mod7, k=2)
-AIC(mod8, k=2)
-AIC(mod9, k=2) 
-AIC(mod10, k=2)
-AIC(mod11, k=2)
-AIC(mod12, k=2)
-AIC(mod13, k=2)
-AIC(mod14, k=2) #### Chicken dinner  #####
-AIC(mod15, k=2) #### Chicken dinner  #####
-AIC(mod16, k=2)
-AIC(mod17, k=2)
-AIC(mod18, k=2)
+AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2)
+AIC(mod3)
+AIC(mod4) 
+AIC(mod5)
+AIC(mod6)
+AIC(mod7)
+AIC(mod8)
+AIC(mod9) 
+AIC(mod10)
+AIC(mod11)
+AIC(mod12)
+AIC(mod13)
+AIC(mod14) #### Chicken dinner  #####
+AIC(mod15) #### Chicken dinner  #####
+AIC(mod16)
+AIC(mod17)
+AIC(mod18)
 ```
 
 scatter plot for open water
@@ -203,8 +203,8 @@ nymphrich +
                   segment.color = 'grey50') +
   theme_classic()
 
-
-p <- ggplot(dataB, aes(x=openwatersizem2, y=nondragonflyabundance)) + 
+#do boxplots first for ID and nondragonfly and nondrgonfly
+p <- ggplot(dataB, aes(x=ID, y=nondragonflyabundance)) + 
     geom_violin(trim=FALSE)
 p + stat_summary(fun.data="mean_sdl", mult=1, 
                  geom="crossbar", width=0.2 )
@@ -235,7 +235,7 @@ p + stat_summary(fun.data=data_summary)
 data <- read.csv("NymphAbund1718.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(data$abundance~data$pH)
+mod1<-glm(data$abundance~data$p + offset(data$Area.sampled))#poisson distribution,hav e family= posisson
 mod2<-glm(data$abundance~data$elevation)
 mod3<-glm(data$abundance~data$fishpresence)
 mod4<-glm(data$abundance~data$lenticlotic)  
@@ -252,26 +252,26 @@ mod14<-glm(data$abundance~data$fishpresence*data$openwater) #### Chicken dinner 
 mod15<-glm(data$abundance~data$fishpresence*data$lenticlotic*data$openwater) #### Almost the same ####
 mod16<-glm(data$abundance~data$lenticlotic*data$openwater)
 mod17<-glm(data$abundance~data$pH*data$openwater)
-mod17<-glm(data$abundance~data$pH*data$openwater)
+#dont use p values!! null model - no covariates y~1. mot compolex with all covariates. a few interesting combos. 17 is too many. most likely to explain the data. DO based on experience and what literature says (be able to defend whatever ones chsen. Knit to word so maybe cn cut and paste into doc (to see if it loosk good otherwise csv)
 
 
-AIC(mod1, k=2)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2, k=2)
-AIC(mod3, k=2)
-AIC(mod4, k=2) 
-AIC(mod5, k=2)
-AIC(mod6, k=2)
-AIC(mod7, k=2)
-AIC(mod8, k=2)
-AIC(mod9, k=2) 
-AIC(mod10, k=2)
-AIC(mod11, k=2)
-AIC(mod12, k=2)
-AIC(mod13, k=2)
-AIC(mod14, k=2) 
-AIC(mod15, k=2) #### Chicken dinner  #####
-AIC(mod16, k=2)
-AIC(mod17, k=2)
+AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
+AIC(mod2)
+AIC(mod3)
+AIC(mod4) 
+AIC(mod5)
+AIC(mod6)
+AIC(mod7)
+AIC(mod8)
+AIC(mod9) 
+AIC(mod10)
+AIC(mod11)
+AIC(mod12)
+AIC(mod13)
+AIC(mod14) 
+AIC(mod15) #### Chicken dinner  #####
+AIC(mod16)
+AIC(mod17)
 ```
 
 
