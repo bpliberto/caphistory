@@ -130,8 +130,6 @@ aictab(cand.set = modelsB, modnames = mod_namesB)
 scatter plot for open water
 ```{r}
 library(ggplot2)
-library(ggrepel)
-library(ggpubr)
 nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Abundance") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 
@@ -142,7 +140,7 @@ pA <- ggplot() +
       # blue plot
       geom_point(data=dataA, aes(x=openwater, y=adjusted.abundance), fill="blue", colour="darkblue", size=1) +
       # red plot
-      geom_point(data=dataB, aes(x=openwatersizem2, y=abundance), fill="red", colour="red", size=1) + xlab("Area of Open Water" ~m^2) + ylab("Abundance")+ theme(legend.position = c(0.95, 0.95),
+      geom_point(data=dataB, aes(x=openwatersizem2, y=abundance), fill="red", colour="red", size=1) + xlab("Area of Open Water" ~(m^2)) + ylab("Abundance")+ theme(legend.position = c(0.95, 0.95),
     legend.justification = c("right", "top"))
 pA
 
@@ -151,7 +149,7 @@ pR <- ggplot() +
       # blue plot
       geom_point(data=dataA, aes(x=openwater, y=Richness), fill="blue", colour="darkblue", size=1) +
       # red plot
-      geom_point(data=dataB, aes(x=openwatersizem2, y=richness), fill="red", colour="red", size=1) + xlab("Area of Open Water" ~m^2) + ylab("Richness") + theme(
+      geom_point(data=dataB, aes(x=openwatersizem2, y=richness), fill="red", colour="red", size=1) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + theme(
     legend.position = c(0.95, 0.95),
     legend.justification = c("right", "top")
   )
