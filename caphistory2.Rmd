@@ -137,10 +137,13 @@ nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() 
 
 nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Richness") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
-ggarrange(adultabund, nymphabund,  
-          ncol = 1, nrow = 3,
-          heights = c(1, 0.5, 0.3))
 
+p <- ggplot() +
+      # blue plot
+      geom_point(data=dataA, aes(x=openwater, y=adjusted.abundance), fill="blue", colour="darkblue", size=1) +
+      # red plot
+      geom_point(data=dataB, aes(x=openwatersizem2, y=abundance), fill="red", colour="red", size=1)
+p
 ```
 
 
