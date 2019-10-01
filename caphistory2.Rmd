@@ -22,6 +22,7 @@ library(marked)
 library(RMark)
 library(ggplot2)
 library(ggrepel)
+library(AICcmodavg)
 ```
 
 
@@ -32,42 +33,39 @@ abundance/effort AIC vvvv
 dataA <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(dataA$adjusted.abundance~dataA$pH)
-mod2<-glm(dataA$adjusted.abundance~dataA$elevation)
-mod3<-glm(dataA$adjusted.abundance~dataA$fishpresence)
-mod4<-glm(dataA$adjusted.abundance~dataA$lenticlotic)  
-mod5<-glm(dataA$adjusted.abundance~dataA$openwater)
-mod6<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation)
-mod7<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence)
-mod8<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic)
-mod9<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater) 
-mod10<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence)
-mod11<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic)
-mod12<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater)
-mod13<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic)
-mod14<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$openwater) #### Chicken dinner  #####
-mod15<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic*dataA$openwater) #### Almost the same ####
-mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater)
-mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater)
+mod1<-glm(dataA$adjusted.abundance~dataA$pH, family = poisson())
+mod2<-glm(dataA$adjusted.abundance~dataA$elevation, family = poisson())
+mod3<-glm(dataA$adjusted.abundance~dataA$fishpresence, family = poisson())
+mod4<-glm(dataA$adjusted.abundance~dataA$lenticlotic, family = poisson())  
+mod5<-glm(dataA$adjusted.abundance~dataA$openwater, family = poisson())
+mod6<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation, family = poisson())
+mod7<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence, family = poisson())
+mod8<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic, family = poisson())
+mod9<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson())
+mod10<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence, family = poisson())
+mod11<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic, family = poisson())
+mod12<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson())
+mod13<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic, family = poisson())
+mod14<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$openwater, family = poisson()) #### Chicken dinner  #####
+mod15<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson()) #### Almost the same ####
+mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater, family = poisson())
+mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater, family = poisson())
 
 
-AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2)
-AIC(mod3)
-AIC(mod4) 
-AIC(mod5)
-AIC(mod6)
-AIC(mod7)
-AIC(mod8)
-AIC(mod9) 
-AIC(mod10)
-AIC(mod11)
-AIC(mod12)
-AIC(mod13)
-AIC(mod14) #### Chicken dinner  #####
-AIC(mod15) #### Almost the same, 0.1258 difference ####
-AIC(mod16)
-AIC(mod17)
+
+# make list of models
+modelsA <- list(mod1, mod2, mod2, mod4, mod5, mod9)
+# names of models
+mod_namesA <- c("pH",
+"elevation",
+"fish",
+"lenticlotic",
+"openwater",
+"elevation fish lenticlotic openwater")
+# makde AIC table
+aictab(cand.set = modelsA, modnames = mod_namesA)
+
+
 
 ```
 
@@ -235,7 +233,7 @@ p + stat_summary(fun.data=data_summary)
 data <- read.csv("NymphAbund1718.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(data$abundance~data$p + offset(data$Area.sampled))#poisson distribution,hav e family= posisson
+mod1<-glm(data$abundance~data$pH + offset(data$Area.sampled, family= poisson()))#poisson distribution,hav e family= posisson
 mod2<-glm(data$abundance~data$elevation)
 mod3<-glm(data$abundance~data$fishpresence)
 mod4<-glm(data$abundance~data$lenticlotic)  
@@ -255,23 +253,7 @@ mod17<-glm(data$abundance~data$pH*data$openwater)
 #dont use p values!! null model - no covariates y~1. mot compolex with all covariates. a few interesting combos. 17 is too many. most likely to explain the data. DO based on experience and what literature says (be able to defend whatever ones chsen. Knit to word so maybe cn cut and paste into doc (to see if it loosk good otherwise csv)
 
 
-AIC(mod1)  ### k = 2 is the "penalty" for adding more factors #####
-AIC(mod2)
-AIC(mod3)
-AIC(mod4) 
-AIC(mod5)
-AIC(mod6)
-AIC(mod7)
-AIC(mod8)
-AIC(mod9) 
-AIC(mod10)
-AIC(mod11)
-AIC(mod12)
-AIC(mod13)
-AIC(mod14) 
-AIC(mod15) #### Chicken dinner  #####
-AIC(mod16)
-AIC(mod17)
+
 ```
 
 
