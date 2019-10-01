@@ -32,24 +32,25 @@ abundance/effort AIC vvvv
 
 dataA <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
 
+
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(dataA$adjusted.abundance~dataA$pH, family = poisson())
-mod2<-glm(dataA$adjusted.abundance~dataA$elevation, family = poisson())
-mod3<-glm(dataA$adjusted.abundance~dataA$fishpresence, family = poisson())
-mod4<-glm(dataA$adjusted.abundance~dataA$lenticlotic, family = poisson())  
-mod5<-glm(dataA$adjusted.abundance~dataA$openwater, family = poisson())
-mod6<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation, family = poisson())
-mod7<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence, family = poisson())
-mod8<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic, family = poisson())
-mod9<-glm(dataA$adjusted.abundance~dataA$pH*dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson())
-mod10<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence, family = poisson())
-mod11<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic, family = poisson())
-mod12<-glm(dataA$adjusted.abundance~dataA$elevation*dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson())
-mod13<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic, family = poisson())
-mod14<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$openwater, family = poisson()) #### Chicken dinner  #####
-mod15<-glm(dataA$adjusted.abundance~dataA$fishpresence*dataA$lenticlotic*dataA$openwater, family = poisson()) #### Almost the same ####
-mod16<-glm(dataA$adjusted.abundance~dataA$lenticlotic*dataA$openwater, family = poisson())
-mod17<-glm(dataA$adjusted.abundance~dataA$pH*dataA$openwater, family = poisson())
+mod1<-glm(adjusted.abundance~pH, data= dataA, family = poisson(link="log"))
+mod2<-glm(adjusted.abundance~elevation, data= dataA,family = poisson(link="log"))
+mod3<-glm(adjusted.abundance~fishpresence, data= dataA,family = poisson(link="log"))
+mod4<-glm(adjusted.abundance~lenticlotic,data= dataA, family = poisson(link="log"))  
+mod5<-glm(adjusted.abundance~openwater, data= dataA,family = poisson(link="log"))
+mod6<-glm(adjusted.abundance~pH*elevation, data= dataA,family = poisson(link="log"))
+mod7<-glm(adjusted.abundance~pH*elevation*fishpresence,data= dataA, family = poisson(link="log"))
+mod8<-glm(adjusted.abundance~pH*elevation*fishpresence*lenticlotic,data= dataA, family = poisson(link="log"))
+mod9<-glm(adjusted.abundance~pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"))
+mod10<-glm(adjusted.abundance~elevation*fishpresence,data= dataA, family = poisson(link="log"))
+mod11<-glm(adjusted.abundance~elevation*fishpresence*lenticlotic, data= dataA,family = poisson(link="log"))
+mod12<-glm(adjusted.abundance~elevation*fishpresence*lenticlotic*openwater, data= dataA,family = poisson(link="log"))
+mod13<-glm(adjusted.abundance~fishpresence*lenticlotic, data= dataA,family = poisson(link="log"))
+mod14<-glm(adjusted.abundance~fishpresence*openwater,data= dataA, family = poisson(link="log")) #### Chicken dinner  #####
+mod15<-glm(adjusted.abundance~fishpresence*lenticlotic*openwater, data= dataA,family = poisson()) #### Almost the same ####
+mod16<-glm(adjusted.abundance~lenticlotic*openwater, data= dataA,family = poisson(link="log"))
+mod17<-glm(adjusted.abundance~pH*openwater,data= dataA, family = poisson(link="log"))
 
 
 
@@ -61,7 +62,7 @@ mod_namesA <- c("pH",
 "fish",
 "lenticlotic",
 "openwater",
-"elevation fish lenticlotic openwater")
+"pH elevation fish lenticlotic openwater")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
