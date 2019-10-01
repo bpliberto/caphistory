@@ -84,21 +84,10 @@ scatterplot of amount of open water and abundances for wetlands for 2017 and 201
 ```{r}
 library(ggplot2)
 adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Abundance") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
-adultabund + 
-  geom_label_repel(aes(label = ID),
-                  box.padding   = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey50') +
-  theme_classic()
 
 
 adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Richness") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
-adultrich + 
-  geom_label_repel(aes(label = ID),
-                  box.padding   = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey50') +
-  theme_classic()
+
 ```
 
 
@@ -142,23 +131,21 @@ scatter plot for open water
 ```{r}
 library(ggplot2)
 library(ggrepel)
+library(ggpubr)
 nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Abundance") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
-nymphabund + 
-  geom_label_repel(aes(label = ID),
-                  box.padding   = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey50') +
-  theme_classic()
 
 nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Richness") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
-nymphrich + 
-  geom_label_repel(aes(label = ID),
-                  box.padding   = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey50') +
-  theme_classic()
 
+ggarrange(adultabund, nymphabund,  
+          ncol = 1, nrow = 3,
+          heights = c(1, 0.5, 0.3))
+
+```
+
+
+violin/box plots
+```{r}
 #do boxplots first for ID and nondragonfly and nondrgonfly
 p <- ggplot(dataB, aes(x=ID, y=nondragonflyabundance)) + 
     geom_violin(trim=FALSE)
