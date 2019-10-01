@@ -39,13 +39,18 @@ modA2<-glm(adjusted.abundance ~ elevation, data= dataA,family = poisson(link="lo
 modA3<-glm(adjusted.abundance ~ fishpresence, data= dataA,family = poisson(link="log"))
 modA4<-glm(adjusted.abundance ~ lenticlotic,data= dataA, family = poisson(link="log"))  
 modA5<-glm(adjusted.abundance ~ openwater, data= dataA,family = poisson(link="log"))
-modA9<-glm(adjusted.abundance ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"))
+modA6<-glm(adjusted.abundance ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"))
 
 
-
+modA7<-glm(Richness  ~  pH, data= dataA, family = poisson(link="log"))
+modA8<-glm(Richness ~ elevation, data= dataA,family = poisson(link="log"))
+modA9<-glm(Richness ~ fishpresence, data= dataA,family = poisson(link="log"))
+modA10<-glm(Richness ~ lenticlotic,data= dataA, family = poisson(link="log"))  
+modA11<-glm(Richness ~ openwater, data= dataA,family = poisson(link="log"))
+modA12<-glm(Richness ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"))
 
 # make list of models
-modelsA <- list(modA1, modA2, modA2, modA4, modA5, modA9)
+modelsA <- list(modA1, modA2, modA2, modA4, modA5, modA6)
 # names of models
 mod_namesA <- c("pH",
 "elevation",
@@ -83,47 +88,28 @@ adultrich +
 ```
 
 
-richness (just to see) vvvvv
-
-```{r}
-### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-mod1<-glm(data$Richness~data$pH)
-mod2<-glm(data$Richness~data$elevation)
-mod3<-glm(data$Richness~data$fishpresence)
-mod4<-glm(data$Richness~data$lenticlotic)  #### Chicken dinner  #####
-mod5<-glm(data$Richness~data$openwater)
-mod6<-glm(data$Richness~data$pH*data$elevation)
-mod7<-glm(data$Richness~data$pH*data$elevation*data$fishpresence)
-mod8<-glm(data$Richness~data$pH*data$elevation*data$fishpresence*data$lenticlotic)
-mod9<-glm(data$Richness~data$pH*data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
-mod10<-glm(data$Richness~data$elevation*data$fishpresence)
-mod11<-glm(data$Richness~data$elevation*data$fishpresence*data$lenticlotic)
-mod12<-glm(data$Richness~data$elevation*data$fishpresence*data$lenticlotic*data$openwater)
-mod13<-glm(data$Richness~data$fishpresence*data$lenticlotic)
-mod14<-glm(data$Richness~data$fishpresence*data$openwater)
-mod15<-glm(data$Richness~data$fishpresence*data$lenticlotic*data$openwater)
-mod16<-glm(data$Richness~data$lenticlotic*data$openwater)
-
-
-
-
-
-```
 
 Nymph Abundance 2018
 ```{r}
 dataB <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-modB1<-glm(abundance ~ pH + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
-modB2<-glm(abundance ~ elevation + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
-modB3<-glm(abundance ~ fishpresence + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
-modB4<-glm(abundance ~ lenticlotic + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
-modB5<-glm(abundance ~ openwatersizem2 + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
-modB9<-glm(abundance ~ pH*elevation*fishpresence*lenticlotic*openwatersizem2 + offset(data$Area.sampled), data= dataB, family = poisson(link="log"))
+modB1<-glm(abundance ~ pH + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB2<-glm(abundance ~ elevation + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB3<-glm(abundance ~ fishpresence + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB4<-glm(abundance ~ lenticlotic + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB5<-glm(abundance ~ openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB6<-glm(abundance ~ pH*elevation*fishpresence*lenticlotic*openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
+
+modB7 <- glm(richness ~ pH + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB8 <- glm(richness ~ elevation + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB9 <- glm(richness ~ fishpresence + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB10 <- glm(richness ~ lenticlotic + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB11 <- glm(richness ~  openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB12 <- glm(richness ~  pH*elevation*fishpresence*lenticlotic*openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
 
 # make list of models
-modelsB <- list(modB1, modB2, modB2, modB4, modB5, modB9)
+modelsB <- list(modB1, modB2, modB2, modB4, modB5, modB6)
 # names of models
 mod_namesB <- c("pH",
 "elevation",
@@ -134,6 +120,7 @@ mod_namesB <- c("pH",
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
+??offset
 
 ```
 
@@ -185,8 +172,8 @@ p + stat_summary(fun.data=data_summary)
 
 
 
-2017 and 2018
-```{r}
+2017 and 2018 - can't do for nymphs because we didnt have a set sampling area
+#```{r}
 data <- read.csv("NymphAbund1718.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
