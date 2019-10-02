@@ -195,6 +195,7 @@ data_summary <- function(nondragonflyabundace) {
    return(c(y=m,ymin=ymin,ymax=ymax))
 }
 dataB$ID <- as.factor(dataB$ID)
+
 head(dataB)
 p <- ggplot(dataB, aes(x=ID, y=nondragonflyabundance)) + 
   geom_violin()
@@ -202,6 +203,31 @@ p
 
 p + stat_summary(fun.data=data_summary)
 ```
+
+```{r}
+dataC <- read.csv("NondragonflyNymphAbun2018.csv", stringsAsFactors = F)
+
+
+library(plyr)
+nondragonflyrichness <- ddply(dataC,~Location,function(x) {
+  data.frame(RICHNESS=sum(x[-1]>0))
+})
+
+
+nondragonfyabundance <- ddply(dataC,~Location,function(x) {
+   data.frame(ABUNDANCE=sum(x[-1]))
+ })
+
+boxplot(AbundanceN,
+        data=dataC,notch= T,
+main="Nondragonfly Abundance Boxplots at Each Wetland",
+xlab="Wetland",
+ylab="Abundance",
+col=c("orange"),
+border="brown"
+)
+```
+
 
 
 
