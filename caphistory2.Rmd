@@ -209,17 +209,20 @@ dataC <- read.csv("NondragonflyNymphAbun2018.csv", stringsAsFactors = F)
 
 
 library(plyr)
-nondragonflyrichness <- ddply(dataC,~Location,function(x) {
-  data.frame(RICHNESS=sum(x[-1]>0))
-})
+dataC$nondragonflyrichness <- apply(dataC[,-1]>0,1,sum)
+dataC$nondragonflyrichness
+#nondragonflyrichness <- ddply(dataC,~Location,function(x) {data.frame(RICHNESS=sum(x[-1]>0))})
+#nondragonflyrichness
 
 
-nondragonfyabundance <- ddply(dataC,~Location,function(x) {
-   data.frame(ABUNDANCE=sum(x[-1]))
- })
+dataC$nondragonflyabundance <- apply(dataC[,-1],1,sum)
+dataC$nondragonflyabundance
+#nondragonflyabundance <- ddply(dataC,~Location,function(x) {  data.frame(ABUNDANCE=sum(x[-1])) })
+#nondragonfyabundance
 
-boxplot(AbundanceN,
-        data=dataC,notch= T,
+dataC$Location <- as.factor(dataC$Location)
+
+boxplot(nondragonflyabundance~Location, data=dataC,notch= T,
 main="Nondragonfly Abundance Boxplots at Each Wetland",
 xlab="Wetland",
 ylab="Abundance",
