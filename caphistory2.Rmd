@@ -97,19 +97,19 @@ Nymph Abundance 2018
 dataB <- read.csv("NymphAbund2018.csv", stringsAsFactors = F)
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-modB1<-glm(abundance ~ pH + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB2<-glm(abundance ~ elevation + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB3<-glm(abundance ~ fishpresence + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB4<-glm(abundance ~ lenticlotic + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB5<-glm(abundance ~ openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB6<-glm(abundance ~ pH*elevation*fishpresence*lenticlotic*openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB1<-glm(abundance ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
+modB2<-glm(abundance ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB3<-glm(abundance ~ fishpresence , data= dataB, family = poisson(link="log"), offset(areasampled))
+modB4<-glm(abundance ~ lenticlotic, data= dataB, family = poisson(link="log"),+ offset(areasampled))
+modB5<-glm(abundance ~ openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB6<-glm(abundance ~ pH*elevation*fishpresence*lenticlotic*openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 
-modB7 <- glm(richness ~ pH + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB8 <- glm(richness ~ elevation + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB9 <- glm(richness ~ fishpresence + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB10 <- glm(richness ~ lenticlotic + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB11 <- glm(richness ~  openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
-modB12 <- glm(richness ~  pH*elevation*fishpresence*lenticlotic*openwatersizem2 + offset(areasampled), data= dataB, family = poisson(link="log"))
+modB7 <- glm(richness ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
+modB8 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB9 <- glm(richness ~ fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB10 <- glm(richness ~ lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB11 <- glm(richness ~  openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB12 <- glm(richness ~  pH*elevation*fishpresence*lenticlotic*openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 # make list of models
 modelsB <- list(modB1, modB2, modB2, modB4, modB5, modB6)
