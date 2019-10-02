@@ -114,7 +114,7 @@ modB2<-glm(abundance ~ elevation, data= dataB, family = poisson(link="log"), off
 modB3<-glm(abundance ~ fishpresence , data= dataB, family = poisson(link="log"), offset(areasampled))
 modB4<-glm(abundance ~ lenticlotic, data= dataB, family = poisson(link="log"),+ offset(areasampled))
 modB5<-glm(abundance ~ openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
-modB6<-glm(abundance ~ pH+elevation+fishpresence+lenticlotic+openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB6<-glm(abundance ~ pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB7<-glm(abundance ~ elevation + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB8<-glm(abundance ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
@@ -126,28 +126,27 @@ modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), o
 modBR3 <- glm(richness ~ fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR4 <- glm(richness ~ lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR5 <- glm(richness ~  openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
-modBR6 <- glm(richness ~  pH+elevation+fishpresence+lenticlotic+openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR6 <- glm(richness ~  pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR7<-glm(richness ~ elevation + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR8<-glm(richness ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR9 <-glm(richness ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR10 <- glm(richness ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 
 # make list of models
-modelsB <- list(modB6, modB7, modB8, modB9, modB10, modB11)
+modelsB <- list(modB6, modB7, modB8, modB9, modB10)
 # names of models
-mod_namesB <- c("pH elevation fish lenticlotic openwater",
+mod_namesB <- c("pH elevation fish lenticlotic openwater avgwatertemp",
 "elevation-fish",
 "pH-fish",
 "ph-openwater",
-"y=1",
-"average water temp")
+"y=1")
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
 # make list of models
 modelsBR <- list( modBR6, modBR7, modBR8,modBR9, modBR10)
 # names of models
-mod_namesBR <- c("pH elevation fish lenticlotic openwater",
+mod_namesBR <- c("pH elevation fish lenticlotic openwater avgwatertemp",
 "elevation-fish",
 "pH-fish",
 "pH-openwater",
