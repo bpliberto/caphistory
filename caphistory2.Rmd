@@ -34,21 +34,21 @@ dataA <- read.csv("Dragonfly1718Abundance.csv", stringsAsFactors = F)
 
 
 ### Each possible combination of variables needs to be analyzed.  The lowest score (not counting the full model?) wins. #####
-modA1<-glm(adjusted.abundance  ~  pH, data= dataA, family = poisson(link="log"))
-modA2<-glm(adjusted.abundance ~ elevation, data= dataA,family = poisson(link="log"))
-modA3<-glm(adjusted.abundance ~ fishpresence, data= dataA,family = poisson(link="log"))
-modA4<-glm(adjusted.abundance ~ lenticlotic,data= dataA, family = poisson(link="log"))  
-modA5<-glm(adjusted.abundance ~ openwater, data= dataA,family = poisson(link="log"))
-modA6<-glm(adjusted.abundance ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"))
-modA7<-glm(adjusted.abundance ~ 1,data= dataA, family = poisson(link="log"))
+modA1<-glm(Abundance  ~  pH, data= dataA, family = poisson(link="log"), offset(adulteffort))
+modA2<-glm(Abundance ~ elevation, data= dataA,family = poisson(link="log"), offset(adulteffort))
+modA3<-glm(Abundance ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
+modA4<-glm(Abundance ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
+modA5<-glm(Abundance ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
+modA6<-glm(Abundance ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modA7<-glm(Abundance ~ 1,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 
-modAR1<-glm(Richness  ~  pH + offset(adulteffort), data= dataA, family = poisson(link="log"))
-modAR2<-glm(Richness ~ elevation + offset(adulteffort), data= dataA,family = poisson(link="log"))
-modAR3<-glm(Richness ~ fishpresence + offset(adulteffort), data= dataA,family = poisson(link="log"))
-modAR4<-glm(Richness ~ lenticlotic + offset(adulteffort),data= dataA, family = poisson(link="log"))  
-modAR5<-glm(Richness ~ openwater + offset(adulteffort), data= dataA,family = poisson(link="log"))
-modAR6<-glm(Richness ~ pH*elevation*fishpresence*lenticlotic*openwater + offset(adulteffort),data= dataA, family = poisson(link="log"))
+modAR1<-glm(Richness  ~  pH, data= dataA, family = poisson(link="log"), offset(adulteffort))
+modAR2<-glm(Richness ~ elevation, data= dataA,family = poisson(link="log"), + offset(adulteffort))
+modAR3<-glm(Richness ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
+modAR4<-glm(Richness ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
+modAR5<-glm(Richness ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
+modAR6<-glm(Richness ~ pH*elevation*fishpresence*lenticlotic*openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR7<-glm(Richness ~ 1,data= dataA, family = poisson(link="log"))
 
 # make list of models
@@ -123,7 +123,6 @@ mod_namesB <- c("pH",
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
-??offset
 
 ```
 
