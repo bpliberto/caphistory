@@ -39,7 +39,7 @@ modA2<-glm(Abundance ~ elevation, data= dataA,family = poisson(link="log"), offs
 modA3<-glm(Abundance ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modA4<-glm(Abundance ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
 modA5<-glm(Abundance ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
-modA6<-glm(Abundance ~ pH + elevation + fishpresence + lenticlotic + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modA6<-glm(Abundance ~ pH + elevation + fishpresence + lenticlotic + openwater +airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA7<-glm(Abundance ~ 1,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA8<-glm(Abundance ~ pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA9 <- glm(Abundance ~ pH + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
@@ -51,41 +51,29 @@ modAR2<-glm(Richness ~ elevation, data= dataA,family = poisson(link="log"),  off
 modAR3<-glm(Richness ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modAR4<-glm(Richness ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
 modAR5<-glm(Richness ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
-modAR6<-glm(Richness ~ pH + elevation + fishpresence + lenticlotic + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modAR6<-glm(Richness ~ pH + elevation + fishpresence + lenticlotic + openwater +airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR7<-glm(Richness ~ 1,data= dataA, family = poisson(link="log"))
 modAR8<-glm(Richness ~ pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR9 <- glm(Richness ~ pH + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR10 <- glm(Richness ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA1, modA2, modA2, modA4, modA5, modA6, modA7, modA8, modA9, modA10)
+modelsA <- list(modA6, modA7, modA8, modA9)
 # names of models
-mod_namesA <- c("pH",
-"elevation",
-"fish",
-"lenticlotic",
-"openwater",
-"pH elevation fish lenticlotic openwater",
+mod_namesA <- c("pH elevation fish lenticlotic openwater airtempdiff",
 "y=1",
 "pH-fish",
-"pH-openwater",
-"airtemp")
+"pH-openwater")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
 # make list of models
-modelsAR <- list(modAR1, modAR2, modAR3, modAR4, modAR5, modAR6, modAR7, modAR8, modAR9, modAR10)
+modelsAR <- list(modAR6, modAR7, modAR8, modAR9)
 # names of models
-mod_namesAR <- c("pH",
-"elevation",
-"fish",
-"lenticlotic",
-"openwater",
-"pH elevation fish lenticlotic openwater",
+mod_namesAR <- c("pH elevation fish lenticlotic openwater airtempdiff",
 "y=1",
 "pH-fish",
-"pH-openwater",
-"airtemp")
+"pH-openwater")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
