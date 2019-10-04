@@ -1,4 +1,4 @@
-Location,Stage,ID,pH,elevation,fish presence,conductivity,air temp,openwatersizem2,richness,abundance,areasampled,adjrich,larvaldensity,darner abun,darner density,other inverts,otherinvertsdensity,chiro numbers,chirodensity
+Location,Stage,ID,pH,elevation,fish presence,conductivity,air temp,openwatersizem2,richness,abundance,areasampled,adjrich,larvaldensity,darner abun,darnerdensity,other inverts,otherinvertsdensity,chiro numbers,chirodensity
 Highest Bog ,nymph,HBn,4.5,851,1,26,0.160858909,13940,12,605,137,0.087591241,4.416058394,65,0.474452555,786,5.737226277,449,3.277372263
 N Cherry Creek Bog,nymph,NCCBn,6.12,821,2,114.4,-0.101336478,15378,11,25,10,1.1,2.5,1,0.1,113,11.3,25,2.5
 N Cherry Creek Ponds,nymph,NCCPn,4.32,827,1,20.4,-0.914366747,1951,7,62,39,0.179487179,1.58974359,21,0.538461538,350,8.974358974,113,2.897435897
