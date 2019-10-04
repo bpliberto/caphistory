@@ -179,6 +179,14 @@ pR
 ```
 
 
+```{r}
+dataD <- read.csv("DragonflyTotalsMarkedvsRecapped.csv", stringsAsFactors = F)
+
+adultrecap <- ggplot(dataD, aes(x=openwatersize, y=percentrecap)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Percent Recaptured")
+adultrecap
+```
+
+
 violin/box plots
 ```{r}
 #do boxplots first for ID and nondragonfly and nondrgonfly
