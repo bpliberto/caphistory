@@ -187,6 +187,34 @@ adultrecap
 ```
 
 
+
+
+
+
+```{r}
+library(ggplot2)
+dataF <- read.csv("LarvalDensity.csv", stringsAsFactors = F)
+larvaldensity <- ggplot(dataF, aes(x=pH, y=larvaldensity)) + geom_point() + xlab("pH") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+
+
+chirodensity <- ggplot(dataF, aes(x=pH, y=chirodensity)) + geom_point() + xlab("pH") + ylab("Chironomid Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+
+
+pF <- ggplot() +
+      # blue plot
+      geom_point(data=dataF, aes(x=pH, y=larvaldensity), fill="blue", colour="darkblue", size=1) +
+      # red plot
+      geom_point(data=dataF, aes(x=pH, y=chirodensity), fill="red", colour="red", size=1) +
+    #green plot
+  geom_point(data=dataF, aes(x=pH, y=otherinvertsdensity), fill="green", colour="green", size=1) + xlab("pH") + ylab("Density")+ theme(legend.position = c(0.95, 0.95),
+    legend.justification = c("right", "top"))
+pF
+
+
+```
+
+
+
 violin/box plots
 ```{r}
 #do boxplots first for ID and nondragonfly and nondrgonfly
