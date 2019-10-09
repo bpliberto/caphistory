@@ -85,15 +85,6 @@ aictab(cand.set = modelsAR, modnames = mod_namesAR)
 ```
 
 
-scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
-```{r}
-library(ggplot2)
-adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Abundance")
-
-
-adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
-
-```
 
 
 
@@ -162,6 +153,24 @@ aictab(cand.set = modelsL, modnames = mod_namesL)
 
 ```
 
+
+scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
+```{r}
+library(ggplot2)
+
+dataA$Richness <- dataA %>%  mutate(Richness = Richness / adulteffort) 
+dataB$richness <- dataB %>%  mutate(Richness = richness / areasampled) 
+dataA$Abundance <- dataA %>%  mutate(Abundance = Abundance / adulteffort) 
+dataB$abundance <- dataB %>%  mutate(Abundance = abundance / areasampled)
+
+adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Abundance")
+
+
+adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
+
+```
+
+
 scatter plot for open water
 ```{r}
 library(ggplot2)
@@ -179,7 +188,7 @@ data_comb <- dataB %>%
 
 #graphs sidde by side but different scales, can't use because they aren't effort adjusted
 library(gridExtra)
-grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
+grid.arrange(nymphabund, adultabund, nrow=1, ncol=2)
 
 pA <- ggplot() +
       # blue plot
@@ -205,15 +214,19 @@ ggplot(data = data_comb, aes(openwater, adjusted.abundance)) + geom_point(aes(co
 
 richness scatter plots adults and nymphs
 ```{r}
-dataA$Richness1 <- dataA %>%  mutate(Richness = Richness / adulteffort) 
 
-data_comb2 <- dataB %>%
+
+
+dataBdata_comb2 <- dataB %>%
   mutate(Richness1 = richness/ areasampled,
          openwater = openwatersizem2) %>%
   bind_rows(dataA) %>%
   filter(!is.na(Stage))
 
 str(data_comb2)
+#graphs sidde by side but different scales, can't use because they aren't effort adjusted
+library(gridExtra)
+grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
 
 # both combined with same color
 ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point()
