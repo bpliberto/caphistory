@@ -184,7 +184,30 @@ ggplot(data = data_comb, aes(openwater, adjusted.abundance)) + geom_point(aes(co
 
 # both on own plots + smooth trendline and black-white background
 ggplot(data = data_comb, aes(openwater, adjusted.abundance)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Abundance") + facet_wrap(~Stage) + geom_smooth(method = "lm") + theme_bw()
+```
 
+
+richness scatter plots adults and nymphs
+```{r}
+
+
+data_comb2 <- dataB %>%
+  mutate(Richness = richness/ areasampled,
+         openwater = openwatersizem2) %>%
+  bind_rows(dataA) %>%
+  mutate(Richness = Richness / adulteffort)
+
+# both combined with same color
+ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point()
+
+# both combined with diff colors
+ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness")
+
+# both on own plots
+ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage)
+
+# both on own plots + smooth trendline and black-white background
+ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage) + geom_smooth(method = "lm") + theme_bw()
 
 pR <- ggplot() +
       # blue plot
