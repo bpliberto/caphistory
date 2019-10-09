@@ -178,6 +178,8 @@ data_comb <- dataB %>%
   bind_rows(dataA) %>%
   filter(!is.na(Stage))
 
+library(gridExtra)
+grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
 
 pA <- ggplot() +
       # blue plot
