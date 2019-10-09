@@ -205,13 +205,15 @@ ggplot(data = data_comb, aes(openwater, adjusted.abundance)) + geom_point(aes(co
 
 richness scatter plots adults and nymphs
 ```{r}
-
+dataA$Richness1 <- dataA %>%  mutate(Richness = Richness / adulteffort) 
 
 data_comb2 <- dataB %>%
-  mutate(Richness = richness/ areasampled,
+  mutate(Richness1 = richness/ areasampled,
          openwater = openwatersizem2) %>%
   bind_rows(dataA) %>%
-  mutate(Richness = Richness / adulteffort)
+  filter(!is.na(Stage))
+
+str(data_comb2)
 
 # both combined with same color
 ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point()
