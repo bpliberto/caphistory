@@ -178,6 +178,7 @@ data_comb <- dataB %>%
   bind_rows(dataA) %>%
   filter(!is.na(Stage))
 
+#graphs sidde by side but different scales, can't use because they aren't effort adjusted
 library(gridExtra)
 grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
 
