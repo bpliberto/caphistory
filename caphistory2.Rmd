@@ -235,12 +235,13 @@ adultrecap
 
 
 ```{r}
-library(ggplot2)
+
 dataF <- read.csv("LarvalDensity.csv", stringsAsFactors = F)
 larvaldensity <- ggplot(dataF, aes(x=pH, y=larvaldensity)) + geom_point() + xlab("pH") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 
-chirodensity <- ggplot(dataF, aes(x=pH, y=chirodensity)) + geom_point() + xlab("pH") + ylab("Chironomid Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid density") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+
 
 
 pF <- ggplot() +
@@ -257,8 +258,8 @@ pF
 
 
 
-violin/box plots
-```{r}
+violin/box plots- not doing these anymore
+#```{r}
 #do boxplots first for ID and nondragonfly and nondrgonfly
 p <- ggplot(dataB, aes(x=ID, y=nondragonflyabundance)) + 
     geom_violin(trim=FALSE)

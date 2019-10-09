@@ -1,7 +1,7 @@
-Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,conductivity,air temp,openwatersizem2,areasampled,darner abun,darner prop,richness,abundance,nondragonfly richness,nondragonflyabundance,averagewatertemp
-Highest Bog ,nymph,HBn,4.5,851,1,1,26,0.160858909,13940,137,65,0.107,12,605,26,786,17.51280735
-N Cherry Creek Bog,nymph,NCCBn,6.12,821,2,1,114.4,-0.101336478,15378,10,1,0.04,11,25,14,113,20.36210422
-N Cherry Creek Ponds,nymph,NCCPn,4.32,827,1,1,20.4,-0.914366747,1951,39,21,0.339,7,62,32,350,17.23071018
-Nemesis Mt Bog N,nymph,NBNn,4.15,832,1,1,28.2,-0.421651784,105.58,3,0,0,1,4,4,24,15.80457781
-Nemesis Mt Bog S,nymph,NBSn,4.34,828,1,1,25.4,0.045653259,3022,38,9,0.076,9,118,20,344,17.88189336
-Nemesis Mt Power Line Pools,nymph,NMPLn,4.53,837,1,1,41.43333333,-0.132097724,122,11,4,0.364,6,11,12,119,
+Location,Stage,ID,pH,elevation,fishpresence,lenticlotic,conductivity,air temp,openwatersizem2,areasampled,darner abun,darner prop,richness,abundance,nondragonfly richness,nondragonflyabundance,averagewatertemp,larvaldensity,darnerdensity,other inverts,otherinvertsdensity,chiro numbers,chirodensity
+Highest Bog ,nymph,HBn,4.5,851,1,1,26,0.160858909,13940,137,65,0.107,12,605,26,786,17.51280735,4.416058394,0.474452555,786,5.737226277,449,3.277372263
+N Cherry Creek Bog,nymph,NCCBn,6.12,821,2,1,114.4,-0.101336478,15378,10,1,0.04,11,25,14,113,20.36210422,2.5,0.1,113,11.3,25,2.5
+N Cherry Creek Ponds,nymph,NCCPn,4.32,827,1,1,20.4,-0.914366747,1951,39,21,0.339,7,62,32,350,17.23071018,1.58974359,0.538461538,350,8.974358974,113,2.897435897
+Nemesis Mt Bog N,nymph,NBNn,4.15,832,1,1,28.2,-0.421651784,105.58,3,0,0,1,4,4,24,15.80457781,1.333333333,0,24,8,8,2.666666667
+Nemesis Mt Bog S,nymph,NBSn,4.34,828,1,1,25.4,0.045653259,3022,38,9,0.076,9,118,20,344,17.88189336,3.105263158,0.236842105,344,9.052631579,104,2.736842105
+Nemesis Mt Power Line Pools,nymph,NMPLn,4.53,837,1,1,41.43333333,-0.132097724,122,11,4,0.364,6,11,12,119,,1,0.363636364,119,10.81818182,,
