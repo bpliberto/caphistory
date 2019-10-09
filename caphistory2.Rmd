@@ -113,7 +113,6 @@ modB8<-glm(abundance ~ pH +fishpresence, data= dataB, family = poisson(link="log
 modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB10 <- glm(abundance ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB11 <- glm(abundance ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
-modB12 <- glm(larvaldensity ~ chirodensity)
 
 modBR1 <- glm(richness ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
