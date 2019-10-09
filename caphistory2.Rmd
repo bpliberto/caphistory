@@ -157,7 +157,7 @@ aictab(cand.set = modelsL, modnames = mod_namesL)
 scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
 ```{r}
 library(ggplot2)
-
+str(dataA)
 dataA$Richness <- dataA %>%  mutate(Richness = Richness / adulteffort) 
 dataB$richness <- dataB %>%  mutate(Richness = richness / areasampled) 
 dataA$Abundance <- dataA %>%  mutate(Abundance = Abundance / adulteffort) 
