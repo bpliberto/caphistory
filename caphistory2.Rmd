@@ -156,17 +156,11 @@ aictab(cand.set = modelsL, modnames = mod_namesL)
 
 scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
 ```{r}
-library(ggplot2)
-str(dataA)
-dataA$Richness <- dataA %>%  mutate(Richness = Richness / adulteffort) 
-dataB$richness <- dataB %>%  mutate(Richness = richness / areasampled) 
-dataA$Abundance <- dataA %>%  mutate(Abundance = Abundance / adulteffort) 
-dataB$abundance <- dataB %>%  mutate(Abundance = abundance / areasampled)
 
 adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Abundance")
 
 
-adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
+adultrich <- ggplot(dataA, aes(x=openwater, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
 
 ```
 
@@ -174,15 +168,14 @@ adultrich <- ggplot(dataA, aes(x=openwater, y=Richness)) + geom_point() + xlab("
 scatter plot for open water
 ```{r}
 library(ggplot2)
-nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Abundance")
+nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Abundance")
 
 
-nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") 
+nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") 
 
 
 data_comb <- dataB %>%
-  mutate(adjusted.abundance = abundance / areasampled,
-         openwater = openwatersizem2) %>%
+  mutate(openwater = openwatersizem2) %>%
   bind_rows(dataA) %>%
   filter(!is.na(Stage))
 
@@ -217,28 +210,27 @@ richness scatter plots adults and nymphs
 
 
 
-dataBdata_comb2 <- dataB %>%
-  mutate(Richness1 = richness/ areasampled,
-         openwater = openwatersizem2) %>%
+dataB_comb2 <- dataB %>%
+  mutate(openwater = openwatersizem2) %>%
   bind_rows(dataA) %>%
   filter(!is.na(Stage))
 
-str(data_comb2)
+
 #graphs sidde by side but different scales, can't use because they aren't effort adjusted
 library(gridExtra)
 grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
 
 # both combined with same color
-ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point()
+ggplot(data = dataB_comb2, aes(openwater, Richness)) + geom_point()
 
 # both combined with diff colors
-ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness")
+ggplot(data = dataB_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness")
 
 # both on own plots
-ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage)
+ggplot(data = dataB_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage)
 
 # both on own plots + smooth trendline and black-white background
-ggplot(data = data_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage) + geom_smooth(method = "lm") + theme_bw()
+ggplot(data = dataB_comb2, aes(openwater, Richness)) + geom_point(aes(color = Stage)) + xlab("Area of Open Water" ~(m^2)) + ylab("Richness") + facet_wrap(~Stage) + geom_smooth(method = "lm") + theme_bw()
 
 pR <- ggplot() +
       # blue plot
