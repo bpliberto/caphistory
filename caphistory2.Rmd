@@ -162,6 +162,11 @@ adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point
 
 adultrich <- ggplot(dataA, aes(x=openwater, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
 
+adultabundp <- ggplot(dataA, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Adult Abundance")
+
+
+adultrichp <- ggplot(dataA, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Adult Richness")
+
 ```
 
 
@@ -173,6 +178,11 @@ nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.abundance)) + geom
 
 nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") 
 
+nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance")
+
+
+nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness")
+
 
 data_comb <- dataB %>%
   mutate(openwater = openwatersizem2) %>%
@@ -181,8 +191,12 @@ data_comb <- dataB %>%
 
 #graphs sidde by side but different scales, can't use because they aren't effort adjusted
 library(gridExtra)
+#openwater
 grid.arrange(nymphabund, adultabund, nrow=1, ncol=2)
 grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
+#pH
+grid.arrange(nymphabundp, adultabundp, nrow=1, ncol=2)
+grid.arrange(nymphrichp, adultrichp, nrow=1, ncol=2)
 
 pA <- ggplot() +
       # blue plot
