@@ -181,7 +181,7 @@ nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_p
 nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
 
 
-nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") + geom_smooth(method = "lm")
+nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
 
 
 
