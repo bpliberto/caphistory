@@ -46,6 +46,7 @@ modA8<-glm(Abundance ~ pH + fishpresence,data= dataA, family = poisson(link="log
 modA9 <- glm(Abundance ~ pH + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA10 <- glm(Abundance ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA11 <- glm(Abundance ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modA12 <- glm(Abundance ~ elevation + pH,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 
 modAR1<-glm(Richness  ~  pH, data= dataA, family = poisson(link="log"), offset(adulteffort))
@@ -59,26 +60,29 @@ modAR8<-glm(Richness ~ pH + fishpresence,data= dataA, family = poisson(link="log
 modAR9 <- glm(Richness ~ pH + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR10 <- glm(Richness ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR11 <- glm(Richness ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modAR12 <- glm(Richness ~ elevation + pH,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA6, modA7, modA8, modA9, modA11)
+modelsA <- list(modA6, modA7, modA8, modA9, modA11, modA12)
 # names of models
 mod_namesA <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 "y=1",
 "pH-fish",
 "pH-openwater",
-"elevation-openwater")
+"elevation-openwater",
+"elevation-pH")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
 # make list of models
-modelsAR <- list(modAR6, modAR7, modAR8, modAR9, modAR11)
+modelsAR <- list(modAR6, modAR7, modAR8, modAR9, modAR11, modAR12)
 # names of models
 mod_namesAR <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 "y=1",
 "pH-fish",
 "pH-openwater",
-"elevation-openwater")
+"elevation-openwater",
+"elevation-pH")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
