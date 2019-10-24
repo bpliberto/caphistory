@@ -192,8 +192,8 @@ nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xla
 nymphabunde <- ggplot(dataB, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") 
 nymphriche <- ggplot(dataB, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")
 
-nymphabundt <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") 
-nymphricht <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")
+nymphabundt <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.abundance)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Abundance") 
+nymphricht <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.richness)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Richness")
 
 nymphabundc <- ggplot(dataB, aes(x=conductivity, y=adjusted.abundance)) + geom_point() + xlab("Conductivity") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
 nymphrichc <- ggplot(dataB, aes(x=conductivity, y=adjusted.richness)) + geom_point() + xlab("Conductivity") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
