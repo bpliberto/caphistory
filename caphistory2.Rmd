@@ -171,6 +171,11 @@ adultrich <- ggplot(dataA, aes(x=openwater, y=adjusted.richness)) + geom_point()
 adultabundp <- ggplot(dataA, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Adult Abundance") + geom_smooth(method = "lm")
 adultrichp <- ggplot(dataA, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Adult Richness") + geom_smooth(method = "lm")
 
+adultabunde <- ggplot(dataA, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Abundance") + geom_smooth(method = "lm")
+adultriche <- ggplot(dataA, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Richness") + geom_smooth(method = "lm")
+
+adultabundt <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.abundance)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Abundance") + geom_smooth(method = "lm")
+adultricht <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.richness)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Richness") + geom_smooth(method = "lm")
 
 ```
 
@@ -183,6 +188,12 @@ nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_p
 
 nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") 
 nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") 
+
+nymphabunde <- ggplot(dataB, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") 
+nymphriche <- ggplot(dataB, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")
+
+nymphabundt <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") 
+nymphricht <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")
 
 nymphabundc <- ggplot(dataB, aes(x=conductivity, y=adjusted.abundance)) + geom_point() + xlab("Conductivity") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
 nymphrichc <- ggplot(dataB, aes(x=conductivity, y=adjusted.richness)) + geom_point() + xlab("Conductivity") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
@@ -200,6 +211,12 @@ grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
 #pH
 grid.arrange(nymphabundp, adultabundp, nrow=1, ncol=2)
 grid.arrange(nymphrichp, adultrichp, nrow=1, ncol=2)
+#elevation
+grid.arrange(nymphabunde, adultabunde, nrow=1, ncol=2)
+grid.arrange(nymphriche, adultriche, nrow=1, ncol=2)
+#temperature
+grid.arrange(nymphabundt, adultabundt, nrow=1, ncol=2)
+grid.arrange(nymphricht, adultricht, nrow=1, ncol=2)
 #conductivity
 grid.arrange(nymphabundc, nymphrichc, nrow=1, ncol=2)
 
