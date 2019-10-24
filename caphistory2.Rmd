@@ -181,8 +181,8 @@ library(ggplot2)
 nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Abundance")
 nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") 
 
-nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
-nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
+nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") 
+nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") 
 
 nymphabundc <- ggplot(dataB, aes(x=conductivity, y=adjusted.abundance)) + geom_point() + xlab("Conductivity") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
 nymphrichc <- ggplot(dataB, aes(x=conductivity, y=adjusted.richness)) + geom_point() + xlab("Conductivity") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
