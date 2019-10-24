@@ -208,15 +208,19 @@ library(gridExtra)
 #openwater
 grid.arrange(nymphabund, adultabund, nrow=1, ncol=2)
 grid.arrange(nymphrich, adultrich, nrow=1, ncol=2)
+grid.arrange(nymphabund, adultabund, nymphrich, adultrich, nrow=2, ncol=2)
 #pH
 grid.arrange(nymphabundp, adultabundp, nrow=1, ncol=2)
 grid.arrange(nymphrichp, adultrichp, nrow=1, ncol=2)
+grid.arrange(nymphabundp, adultabundp, nymphrichp, adultrichp, nrow=2, ncol=2)
 #elevation
 grid.arrange(nymphabunde, adultabunde, nrow=1, ncol=2)
 grid.arrange(nymphriche, adultriche, nrow=1, ncol=2)
+grid.arrange(nymphabunde, adultabunde, nymphriche, adultriche, nrow=2, ncol=2)
 #temperature
 grid.arrange(nymphabundt, adultabundt, nrow=1, ncol=2)
 grid.arrange(nymphricht, adultricht, nrow=1, ncol=2)
+grid.arrange(nymphabundt, adultabundt, nymphricht, adultricht, nrow=2, ncol=2)
 #conductivity
 grid.arrange(nymphabundc, nymphrichc, nrow=1, ncol=2)
 
