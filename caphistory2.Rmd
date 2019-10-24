@@ -108,6 +108,7 @@ modB8<-glm(abundance ~ pH +fishpresence, data= dataB, family = poisson(link="log
 modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB10 <- glm(abundance ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB11 <- glm(abundance ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
+modB12 <-glm(abundance ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modBR1 <- glm(richness ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
@@ -119,30 +120,33 @@ modBR7<-glm(richness ~ elevation + fishpresence, data= dataB, family = poisson(l
 modBR8<-glm(richness ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR9 <-glm(richness ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR10 <- glm(richness ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
+modBR12 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modL1 <- glm(larvaldensity ~ chirodensity, data = dataB)
 modL2 <-glm(larvaldensity ~ otherinvertsdensity, data = dataB)
 modL3 <-glm(larvaldensity ~ otherinvertsdensity + chirodensity + darnerdensity , data = dataB)
 
 # make list of models
-modelsB <- list(modB6, modB7, modB8, modB9, modB10)
+modelsB <- list(modB6, modB7, modB8, modB9, modB10, modB12)
 # names of models
 mod_namesB <- c("pH-elevation-fish-lenticlotic-openwater-avgwatertemp",
 "elevation-fish",
 "pH-fish",
 "ph-openwater",
-"y=1")
+"y=1",
+"ph-elevation")
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
 # make list of models
-modelsBR <- list( modBR6, modBR7, modBR8,modBR9, modBR10)
+modelsBR <- list( modBR6, modBR7, modBR8,modBR9, modBR10, modBR12)
 # names of models
 mod_namesBR <- c("pH-elevation-fish-lenticlotic-openwater-avgwatertemp",
 "elevation-fish",
 "pH-fish",
 "pH-openwater",
-"y=1")
+"y=1",
+"ph-elevation")
 # makde AIC table
 aictab(cand.set = modelsBR, modnames = mod_namesBR)
 
