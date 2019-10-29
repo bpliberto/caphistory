@@ -305,7 +305,7 @@ dataF <- read.csv("LarvalDensity.csv", stringsAsFactors = F)
 larvaldensity <- ggplot(dataF, aes(x=pH, y=larvaldensity)) + geom_point() + xlab("pH") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 
-chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid density") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid density") + ylab("Larval Density") + geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 
 
