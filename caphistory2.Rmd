@@ -305,10 +305,10 @@ dataF <- read.csv("LarvalDensity.csv", stringsAsFactors = F)
 larvaldensity <- ggplot(dataF, aes(x=pH, y=larvaldensity)) + geom_point() + xlab("pH") + ylab("Larval Density") #+ geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 
 
-chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid Density") + ylab("Larval Density") + geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid Density") + ylab("Larval Density") + geom_text(aes(label=Location),hjust="inward", vjust="inward") + theme_bw()
 chirodensity
 
-invertdensity <- ggplot(dataF, aes(x=otherinvertsdensity, y=larvaldensity)) + geom_point() + xlab("Other Invertebrates Density") + ylab("Larval Density") + geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+invertdensity <- ggplot(dataF, aes(x=otherinvertsdensity, y=larvaldensity)) + geom_point() + xlab("Other Invertebrates Density") + ylab("Larval Density") + geom_text(aes(label=Location),hjust="inward", vjust="inward") + theme_bw()
 invertdensity
 
 grid.arrange(chirodensity, invertdensity, nrow=1, ncol=2)
