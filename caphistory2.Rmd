@@ -165,17 +165,17 @@ aictab(cand.set = modelsL, modnames = mod_namesL)
 scatterplot of amount of open water and abundances for wetlands for 2017 and 2018
 ```{r}
 
-adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Abundance")
-adultrich <- ggplot(dataA, aes(x=openwater, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")
+adultabund <- ggplot(dataA, aes(x=openwater, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Abundance") + theme_bw()
+adultrich <- ggplot(dataA, aes(x=openwater, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Adult Richness")+ theme_bw()
 
-adultabundp <- ggplot(dataA, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Adult Abundance") + geom_smooth(method = "lm")
-adultrichp <- ggplot(dataA, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Adult Richness") + geom_smooth(method = "lm")
+adultabundp <- ggplot(dataA, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Adult Abundance") + geom_smooth(method = "lm")+ theme_bw()
+adultrichp <- ggplot(dataA, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Adult Richness") + geom_smooth(method = "lm")+ theme_bw()
 
-adultabunde <- ggplot(dataA, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Abundance") + geom_smooth(method = "lm")
-adultriche <- ggplot(dataA, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Richness") + geom_smooth(method = "lm")
+adultabunde <- ggplot(dataA, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Abundance") + geom_smooth(method = "lm")+ theme_bw()
+adultriche <- ggplot(dataA, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Adult Richness") + geom_smooth(method = "lm")+ theme_bw()
 
-adultabundt <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.abundance)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Abundance") + geom_smooth(method = "lm")
-adultricht <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.richness)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Richness") + geom_smooth(method = "lm")
+adultabundt <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.abundance)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Abundance") + geom_smooth(method = "lm")+ theme_bw()
+adultricht <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.richness)) + geom_point() + xlab("Air Temperature Difference" ~C) + ylab("Adult Richness") + geom_smooth(method = "lm")+ theme_bw()
 
 ```
 
@@ -183,20 +183,20 @@ adultricht <- ggplot(dataA, aes(x=airtempdiff, y=adjusted.richness)) + geom_poin
 scatter plot for open water
 ```{r}
 library(ggplot2)
-nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Abundance")
-nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") 
+nymphabund <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.abundance)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Abundance") + theme_bw()
+nymphrich <- ggplot(dataB, aes(x=openwatersizem2, y=adjusted.richness)) + geom_point() + xlab("Area of Open Water" ~m^2) + ylab("Nymph Richness") + theme_bw()
 
-nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") 
-nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") 
+nymphabundp <- ggplot(dataB, aes(x=pH, y=adjusted.abundance)) + geom_point() + xlab("pH") + ylab("Nymph Abundance") + theme_bw()
+nymphrichp <- ggplot(dataB, aes(x=pH, y=adjusted.richness)) + geom_point() + xlab("pH") + ylab("Nymph Richness") + theme_bw()
 
-nymphabunde <- ggplot(dataB, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") 
-nymphriche <- ggplot(dataB, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")
+nymphabunde <- ggplot(dataB, aes(x=elevation, y=adjusted.abundance)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Abundance") + theme_bw()
+nymphriche <- ggplot(dataB, aes(x=elevation, y=adjusted.richness)) + geom_point() + xlab("Elevation (m)") + ylab("Nymph Richness")+ theme_bw()
 
-nymphabundt <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.abundance)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Abundance") 
-nymphricht <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.richness)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Richness")
+nymphabundt <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.abundance)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Abundance") + theme_bw()
+nymphricht <- ggplot(dataB, aes(x=averagewatertemp, y=adjusted.richness)) + geom_point() + xlab("Average Water Temperature" ~C) + ylab("Nymph Richness")+ theme_bw()
 
-nymphabundc <- ggplot(dataB, aes(x=conductivity, y=adjusted.abundance)) + geom_point() + xlab("Conductivity") + ylab("Nymph Abundance") + geom_smooth(method = "lm")
-nymphrichc <- ggplot(dataB, aes(x=conductivity, y=adjusted.richness)) + geom_point() + xlab("Conductivity") + ylab("Nymph Richness") + geom_smooth(method = "lm") 
+nymphabundc <- ggplot(dataB, aes(x=conductivity, y=adjusted.abundance)) + geom_point() + xlab("Conductivity") + ylab("Nymph Abundance") + geom_smooth(method = "lm")+ theme_bw()
+nymphrichc <- ggplot(dataB, aes(x=conductivity, y=adjusted.richness)) + geom_point() + xlab("Conductivity") + ylab("Nymph Richness") + geom_smooth(method = "lm") + theme_bw()
 
 data_comb <- dataB %>%
   mutate(openwater = openwatersizem2) %>%
@@ -308,6 +308,10 @@ larvaldensity <- ggplot(dataF, aes(x=pH, y=larvaldensity)) + geom_point() + xlab
 chirodensity <- ggplot(dataF, aes(x=chirodensity, y=larvaldensity)) + geom_point() + xlab("Chironomid Density") + ylab("Larval Density") + geom_text(aes(label=ID),hjust=.5, vjust=1.5)
 chirodensity
 
+invertdensity <- ggplot(dataF, aes(x=otherinvertsdensity, y=larvaldensity)) + geom_point() + xlab("Other Invertebrates Density") + ylab("Larval Density") + geom_text(aes(label=ID),hjust=.5, vjust=1.5)
+invertdensity
+
+grid.arrange(chirodensity, invertdensity, nrow=1, ncol=2)
 
 pF <- ggplot() +
       # blue plot
