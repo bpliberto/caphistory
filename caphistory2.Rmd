@@ -86,10 +86,13 @@ mod_namesAR <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
+library(rsq)
+rsq(modA6,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
 summary(modA6)
 1 - (45860/494200 )
 modAR7
 1 - (87.91/87.91)
+rsq(modAR7,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # so this thing is telling me that the r^2 value for this is 0......which would mean this isn't explaining any of the variance in the data? so then how does it have the lowest AIC?
 ```
 
 
