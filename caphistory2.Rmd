@@ -63,34 +63,29 @@ modAR11 <- glm(Richness ~ elevation + openwater,data= dataA, family = poisson(li
 modAR12 <- glm(Richness ~ elevation + pH,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA6, modA7, modA8, modA9, modA11, modA12)
+modelsA <- list(modA6, modA7, modA8, modA9, modA11)
 # names of models
 mod_namesA <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 "y=1",
 "pH-fish",
 "pH-openwater",
-"elevation-openwater",
-"elevation-pH")
+"elevation-openwater")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
 # make list of models
-modelsAR <- list(modAR6, modAR7, modAR8, modAR9, modAR11, modAR12)
+modelsAR <- list(modAR6, modAR7, modAR8, modAR9, modAR11)
 # names of models
 mod_namesAR <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 "y=1",
 "pH-fish",
 "pH-openwater",
-"elevation-openwater",
-"elevation-pH")
+"elevation-openwater")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
 library(rsq)
 rsq(modA6,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
-summary(modA6)
-1 - (45860/494200 )
-modAR7
 
 rsq(modAR6,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # so this thing is telling me that the r^2 value for this is 0......which would mean this isn't explaining any of the variance in the data? so then how does it have the lowest AIC?
 ```
