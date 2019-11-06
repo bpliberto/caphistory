@@ -55,7 +55,7 @@ modAR3<-glm(Richness ~ fishpresence, data= dataA,family = poisson(link="log"), o
 modAR4<-glm(Richness ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
 modAR5<-glm(Richness ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modAR6<-glm(Richness ~ pH + elevation + fishpresence + lenticlotic + openwater +airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
-modAR7<-glm(Richness ~ 1,data= dataA, family = poisson(link="log"))
+modAR7<-glm(Richness ~ 1,data= dataA, family = poisson(link="log"),  offset(adulteffort))
 modAR8<-glm(Richness ~ pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR9 <- glm(Richness ~ pH + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR10 <- glm(Richness ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
