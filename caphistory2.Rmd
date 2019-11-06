@@ -86,6 +86,10 @@ mod_namesAR <- c("pH-elevation-fish-lenticlotic-openwater-airtempdiff",
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
+summary(modA6)
+1 - (45860/494200 )
+modAR7
+1 - (87.91/87.91)
 ```
 
 
