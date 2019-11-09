@@ -91,6 +91,14 @@ mod_namesA <- c("ph",
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
+modelsA <- list(modA9,modA2)
+# names of models
+mod_namesA <- c("ph-openwater",
+                "elevation")
+# makde AIC table
+aictab(cand.set = modelsA, modnames = mod_namesA)
+
+
 library(rsq)
 rsq(modA9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
 
@@ -119,6 +127,13 @@ mod_namesAR <- c("ph",
                 "fish",
                 "lenticlotic",
                 "openwater",
+                "temp")
+# makde AIC table
+aictab(cand.set = modelsAR, modnames = mod_namesAR)
+
+modelsAR <- list(modAR10, modAR13)
+# names of models
+mod_namesAR <- c("elevation-airtempdiff",
                 "temp")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
@@ -166,7 +181,7 @@ modBR12 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"
 
 modL1 <- glm(larvaldensity ~ chirodensity, data = dataB)
 modL2 <-glm(larvaldensity ~ otherinvertsdensity, data = dataB)
-modL3 <-glm(larvaldensity ~ otherinvertsdensity + chirodensity + darnerdensity , data = dataB)
+modL3 <-glm(larvaldensity ~ darnerdensity , data = dataB)
 
 # make list of models
 modelsB <- list(modB7, modB8, modB9, modB10, modB12)
@@ -189,6 +204,13 @@ mod_namesB <- c("ph",
                 "lenticlotic",
                 "openwater",
                 "temp")
+# makde AIC table
+aictab(cand.set = modelsB, modnames = mod_namesB)
+
+modelsB <- list(modB2, modB9)
+# names of models
+mod_namesB <- c("ph-openwater",
+                "elevation")
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
@@ -220,6 +242,13 @@ mod_namesBR <- c("ph",
 # makde AIC table
 aictab(cand.set = modelsBR, modnames = mod_namesBR)
 
+modelsBR <- list(modBR5, modBR9)
+# names of models
+mod_namesBR <- c("openwater",
+                "ph-openwater")
+# makde AIC table
+aictab(cand.set = modelsBR, modnames = mod_namesBR)
+
 rsq(modBR9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB) #this is supposed to give me the r^2 values for glms
 rsq(modBR5,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
 
@@ -228,7 +257,7 @@ modelsL <- list( modL1, modL2, modL3)
 # names of models
 mod_namesL <- c("Chironomids",
                 "Other-Inverts",
-                "otherinvertsdensity-chirodensity-darnerdensity")
+                "darnerdensity")
 # makde AIC table
 aictab(cand.set = modelsL, modnames = mod_namesL)
 
