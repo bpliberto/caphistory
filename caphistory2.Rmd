@@ -394,7 +394,9 @@ pR
 ```{r}
 dataD <- read.csv("DragonflyTotalsMarkedvsRecapped.csv", stringsAsFactors = F)
 
-adultrecap <- ggplot(dataD, aes(x=openwatersize, y=percentrecap)) + geom_point() + scale_y_continuous(labels=scales::percent)+ xlab("Area of Open Water" ~(m^2)) + ylab("Percent Recaptured") +theme_bw()
+adultrecap <- ggplot(dataD, aes(x=openwatersize, y=percentrecap)) + geom_point() + scale_y_continuous(labels=scales::percent)+ xlab("Area of Open Water" ~(m^2)) + ylab("Percent Recaptured") +theme_bw() + theme(axis.text = element_text(size = 15))  + theme(axis.title = element_text(size = 25))
+
+
 adultrecap
 ```
 
