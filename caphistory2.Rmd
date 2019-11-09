@@ -143,7 +143,7 @@ modB2<-glm(abundance ~ elevation, data= dataB, family = poisson(link="log"), off
 modB3<-glm(abundance ~ fishpresence , data= dataB, family = poisson(link="log"), offset(areasampled))
 modB4<-glm(abundance ~ lenticlotic, data= dataB, family = poisson(link="log"),+ offset(areasampled))
 modB5<-glm(abundance ~ openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
-modB6<-glm(abundance ~ pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB6<-glm(abundance ~ pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled)) #no
 modB7<-glm(abundance ~ elevation + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB8<-glm(abundance ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
@@ -156,11 +156,12 @@ modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), o
 modBR3 <- glm(richness ~ fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR4 <- glm(richness ~ lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR5 <- glm(richness ~  openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
-modBR6 <- glm(richness ~  pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR6 <- glm(richness ~  pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled)) #no
 modBR7<-glm(richness ~ elevation + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR8<-glm(richness ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR9 <-glm(richness ~ pH +openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR10 <- glm(richness ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
+modBR11 <- glm(richness ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
 modBR12 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modL1 <- glm(larvaldensity ~ chirodensity, data = dataB)
@@ -168,10 +169,9 @@ modL2 <-glm(larvaldensity ~ otherinvertsdensity, data = dataB)
 modL3 <-glm(larvaldensity ~ otherinvertsdensity + chirodensity + darnerdensity , data = dataB)
 
 # make list of models
-modelsB <- list(modB6, modB7, modB8, modB9, modB10, modB12)
+modelsB <- list(modB7, modB8, modB9, modB10, modB12)
 # names of models
-mod_namesB <- c("pH-elevation-fish-lenticlotic-openwater-avgwatertemp",
-"elevation-fish",
+mod_namesB <- c("elevation-fish",
 "pH-fish",
 "ph-openwater",
 "y=1",
@@ -179,17 +179,49 @@ mod_namesB <- c("pH-elevation-fish-lenticlotic-openwater-avgwatertemp",
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
+###simple
 # make list of models
-modelsBR <- list( modBR6, modBR7, modBR8,modBR9, modBR10, modBR12)
+modelsB <- list( modB1, modB2, modB3,modB4, modB5, modB11)
 # names of models
-mod_namesBR <- c("pH-elevation-fish-lenticlotic-openwater-avgwatertemp",
-"elevation-fish",
+mod_namesB <- c("ph",
+                "elevation",
+                "fish",
+                "lenticlotic",
+                "openwater",
+                "temp")
+# makde AIC table
+aictab(cand.set = modelsB, modnames = mod_namesB)
+
+rsq(modB9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB) #this is supposed to give me the r^2 values for glms
+rsq(modB2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
+
+
+# make list of models
+modelsBR <- list(modBR7, modBR8,modBR9, modBR10, modBR12)
+# names of models
+mod_namesBR <- c("elevation-fish",
 "pH-fish",
 "pH-openwater",
 "y=1",
 "ph-elevation")
 # makde AIC table
 aictab(cand.set = modelsBR, modnames = mod_namesBR)
+
+###simple
+# make list of models
+modelsBR <- list( modBR1, modBR2, modBR3,modBR4, modBR5, modBR11)
+# names of models
+mod_namesBR <- c("ph",
+                "elevation",
+                "fish",
+                "lenticlotic",
+                "openwater",
+                "temp")
+# makde AIC table
+aictab(cand.set = modelsBR, modnames = mod_namesBR)
+
+rsq(modBR9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB) #this is supposed to give me the r^2 values for glms
+rsq(modBR5,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
 
 # make list of models
 modelsL <- list( modL1, modL2, modL3)
@@ -200,12 +232,7 @@ mod_namesL <- c("Chironomids",
 # makde AIC table
 aictab(cand.set = modelsL, modnames = mod_namesL)
 
-rsq(modB6,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB) #this is supposed to give me the r^2 values for glms
-summary(modB6)
 
-modBR6
-
-rsq(modBR6,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
 
 ```
 
