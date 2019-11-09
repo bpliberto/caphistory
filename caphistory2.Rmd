@@ -40,7 +40,6 @@ modA2<-glm(Abundance ~ elevation, data= dataA,family = poisson(link="log"), offs
 modA3<-glm(Abundance ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modA4<-glm(Abundance ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
 modA5<-glm(Abundance ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
-modA13<-glm(Abundance ~ airtempdiff, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modA6<-glm(Abundance ~ pH + elevation + fishpresence + lenticlotic + openwater +airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort)) #fuck this model it sucks
 modA7<-glm(Abundance ~ 1,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA8<-glm(Abundance ~ pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
@@ -48,6 +47,7 @@ modA9 <- glm(Abundance ~ pH + openwater,data= dataA, family = poisson(link="log"
 modA10 <- glm(Abundance ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA11 <- glm(Abundance ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA12 <- glm(Abundance ~ lenticlotic + pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modA13 <- glm(Abundance ~ elevation + airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 
 modAR1<-glm(Richness  ~  pH, data= dataA, family = poisson(link="log"), offset(adulteffort))
@@ -55,7 +55,6 @@ modAR2<-glm(Richness ~ elevation, data= dataA,family = poisson(link="log"),  off
 modAR3<-glm(Richness ~ fishpresence, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modAR4<-glm(Richness ~ lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))  
 modAR5<-glm(Richness ~ openwater, data= dataA,family = poisson(link="log"), offset(adulteffort))
-modAR13<-glm(Richness ~ airtempdiff, data= dataA,family = poisson(link="log"), offset(adulteffort))
 modAR6<-glm(Richness ~ pH + elevation + fishpresence + lenticlotic + openwater +airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort)) #fuck this model it sucks
 modAR7<-glm(Richness ~ 1,data= dataA, family = poisson(link="log"),  offset(adulteffort))
 modAR8<-glm(Richness ~ pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
@@ -63,22 +62,24 @@ modAR9 <- glm(Richness ~ pH + openwater,data= dataA, family = poisson(link="log"
 modAR10 <- glm(Richness ~ airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR11 <- glm(Richness ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR12 <- glm(Richness ~ lenticlotic + pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modAR13<- glm(Richness ~  elevation + airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA2,modA7, modA8, modA9, modA11, modA12)
+modelsA <- list(modA2,modA7, modA8, modA9, modA11, modA12, modA13)
 # names of models
 mod_namesA <- c("elevation",
   "y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish")
+"ph-lenlot-fish",
+"elevation-airtempdiff")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
 #looking at super simple models
 # make list of models
-modelsA <- list(modA1,modA2, modA3, modA4, modA5, modA13)
+modelsA <- list(modA1,modA2, modA3, modA4, modA5, modA10)
 # names of models
 mod_namesA <- c("ph",
                 "elevation",
@@ -91,22 +92,23 @@ aictab(cand.set = modelsA, modnames = mod_namesA)
 
 
 # make list of models
-modelsAR <- list(modAR2, modAR7, modAR8, modAR9, modAR11, modAR12)
+modelsAR <- list(modAR2, modAR7, modAR8, modAR9, modAR11, modAR12, modAR13)
 # names of models
 mod_namesAR <- c("elevation",
 "y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish")
+"ph-lenlot-fish",
+"elevation-airtempdiff")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
 #looking at super simple models
 # make list of models
-modelsA <- list(modAR1,modAR2, modAR3, modAR4, modAR5, modAR13)
+modelsAR <- list(modAR1,modAR2, modAR3, modAR4, modAR5, modAR10)
 # names of models
-mod_namesA <- c("ph",
+mod_namesAR <- c("ph",
                 "elevation",
                 "fish",
                 "lenticlotic",
