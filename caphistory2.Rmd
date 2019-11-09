@@ -77,6 +77,7 @@ mod_namesA <- c("elevation",
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
+
 #looking at super simple models
 # make list of models
 modelsA <- list(modA1,modA2, modA3, modA4, modA5, modA10)
@@ -89,6 +90,11 @@ mod_namesA <- c("ph",
                 "temp")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
+
+library(rsq)
+rsq(modA9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
+
+rsq(modA2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1 suck
 
 
 # make list of models
@@ -118,9 +124,9 @@ mod_namesAR <- c("ph",
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
 library(rsq)
-rsq(modA9,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
+rsq(modAR13,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
 
-rsq(modAR12,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1 suck
+rsq(modAR10,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1 suck
 ```
 
 
