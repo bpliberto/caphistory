@@ -131,7 +131,7 @@ mod_namesAR <- c("ph",
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
-modelsAR <- list(modAR10, modAR13)
+modelsAR <- list(modAR13, modAR10)
 # names of models
 mod_namesAR <- c("elevation-airtempdiff",
                 "temp")
@@ -207,7 +207,7 @@ mod_namesB <- c("ph",
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
-modelsB <- list(modB2, modB9)
+modelsB <- list(modB9, modB2)
 # names of models
 mod_namesB <- c("ph-openwater",
                 "elevation")
