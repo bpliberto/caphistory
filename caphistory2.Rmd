@@ -65,15 +65,14 @@ modAR12 <- glm(Richness ~ lenticlotic + pH + fishpresence,data= dataA, family = 
 modAR13<- glm(Richness ~  elevation + airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA2,modA7, modA8, modA9, modA11, modA12, modA13)
+modelsA <- list(modA2,modA7, modA8, modA9, modA11, modA12)
 # names of models
 mod_namesA <- c("elevation",
   "y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish",
-"elevation-airtempdiff")
+"ph-lenlot-fish")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
@@ -106,15 +105,14 @@ rsq(modA2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1
 
 
 # make list of models
-modelsAR <- list(modAR2, modAR7, modAR8, modAR9, modAR11, modAR12, modAR13)
+modelsAR <- list(modAR2, modAR7, modAR8, modAR9, modAR11, modAR12)
 # names of models
 mod_namesAR <- c("elevation",
 "y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish",
-"elevation-airtempdiff")
+"ph-lenlot-fish")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
@@ -139,7 +137,7 @@ mod_namesAR <- c("elevation-airtempdiff",
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
 library(rsq)
-rsq(modAR13,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
+rsq(modAR12,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
 
 rsq(modAR10,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1 suck
 ```
