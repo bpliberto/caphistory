@@ -48,7 +48,7 @@ modA10 <- glm(Abundance ~ airtempdiff,data= dataA, family = poisson(link="log"),
 modA11 <- glm(Abundance ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA12 <- glm(Abundance ~ lenticlotic + pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modA13 <- glm(Abundance ~ elevation + airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
-
+modA14 <- glm(Abundance ~ pH + lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 modAR1<-glm(Richness  ~  pH, data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR2<-glm(Richness ~ elevation, data= dataA,family = poisson(link="log"),  offset(adulteffort))
@@ -63,16 +63,17 @@ modAR10 <- glm(Richness ~ airtempdiff,data= dataA, family = poisson(link="log"),
 modAR11 <- glm(Richness ~ elevation + openwater,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR12 <- glm(Richness ~ lenticlotic + pH + fishpresence,data= dataA, family = poisson(link="log"), offset(adulteffort))
 modAR13<- glm(Richness ~  elevation + airtempdiff,data= dataA, family = poisson(link="log"), offset(adulteffort))
+modAR14<- glm(Richness ~  pH + lenticlotic,data= dataA, family = poisson(link="log"), offset(adulteffort))
 
 # make list of models
-modelsA <- list(modA2,modA7, modA8, modA9, modA11, modA12)
+modelsA <- list(modA7, modA8, modA9, modA11, modA12, modA14)
 # names of models
-mod_namesA <- c("elevation",
-  "y=1",
+mod_namesA <- c(  "y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish")
+"ph-lenlot-fish",
+"ph-lenlot")
 # makde AIC table
 aictab(cand.set = modelsA, modnames = mod_namesA)
 
@@ -105,14 +106,14 @@ rsq(modA2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1
 
 
 # make list of models
-modelsAR <- list(modAR2, modAR7, modAR8, modAR9, modAR11, modAR12)
+modelsAR <- list(modAR7, modAR8, modAR9, modAR11, modAR12, modAR14)
 # names of models
-mod_namesAR <- c("elevation",
-"y=1",
+mod_namesAR <- c("y=1",
 "pH-fish",
 "pH-openwater",
 "elevation-openwater",
-"ph-lenlot-fish")
+"ph-lenlot-fish",
+"ph-lenlot")
 # makde AIC table
 aictab(cand.set = modelsAR, modnames = mod_namesAR)
 
@@ -167,6 +168,7 @@ modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link=
 modB10 <- glm(abundance ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB11 <- glm(abundance ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB12 <-glm(abundance ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB14 <-glm(abundance ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modBR1 <- glm(richness ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
@@ -181,19 +183,21 @@ modBR9 <-glm(richness ~ pH +openwatersizem2, data= dataB, family = poisson(link=
 modBR10 <- glm(richness ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modBR11 <- glm(richness ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
 modBR12 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR14 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modL1 <- glm(larvaldensity ~ chirodensity, data = dataB)
 modL2 <-glm(larvaldensity ~ otherinvertsdensity, data = dataB)
 modL3 <-glm(larvaldensity ~ darnerdensity , data = dataB)
 
 # make list of models
-modelsB <- list(modB7, modB8, modB9, modB10, modB12)
+modelsB <- list(modB7, modB8, modB9, modB10, modB12, modB14)
 # names of models
 mod_namesB <- c("elevation-fish",
 "pH-fish",
 "ph-openwater",
 "y=1",
-"ph-elevation")
+"ph-elevation",
+"ph-lenlot")
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
@@ -223,13 +227,14 @@ rsq(modB2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
 
 
 # make list of models
-modelsBR <- list(modBR7, modBR8,modBR9, modBR10, modBR12)
+modelsBR <- list(modBR7, modBR8,modBR9, modBR10, modBR12, modBR14)
 # names of models
 mod_namesBR <- c("elevation-fish",
 "pH-fish",
 "pH-openwater",
 "y=1",
-"ph-elevation")
+"ph-elevation",
+"ph-lenlot")
 # makde AIC table
 aictab(cand.set = modelsBR, modnames = mod_namesBR)
 
@@ -267,7 +272,9 @@ mod_namesL <- c("Chironomids",
 aictab(cand.set = modelsL, modnames = mod_namesL)
 
 summary(modB9)
-
+summary(modBR9)
+plot(modB9)
+plot(modBR9)
 ```
 
 
