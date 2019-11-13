@@ -140,6 +140,9 @@ library(rsq)
 rsq(modAR12,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) #this is supposed to give me the r^2 values for glms
 
 rsq(modAR10,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of 1 suck
+
+summary(modA9)
+summary(modAR12)
 ```
 
 
@@ -263,7 +266,7 @@ mod_namesL <- c("Chironomids",
 # makde AIC table
 aictab(cand.set = modelsL, modnames = mod_namesL)
 
-
+summary(modB9)
 
 ```
 
