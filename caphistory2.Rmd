@@ -144,6 +144,8 @@ rsq(modAR10,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataA) # r2 values of
 
 summary(modA9)
 summary(modAR12)
+plot(modA9)
+plot(modAR12)
 ```
 
 
