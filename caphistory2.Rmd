@@ -170,14 +170,15 @@ modB9 <-glm(abundance ~ pH +openwatersizem2, data= dataB, family = poisson(link=
 modB10 <- glm(abundance ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB11 <- glm(abundance ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
 modB12 <-glm(abundance ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
-modB14 <-glm(abundance ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB14 <-glm(abundance ~ pH +lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
+modB15 <-glm(abundance ~ pH +lenticlotic + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modBR1 <- glm(richness ~ pH , data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR2 <- glm(richness ~ elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR3 <- glm(richness ~ fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR4 <- glm(richness ~ lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR5 <- glm(richness ~  openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
-modBR13 <- glm(richness ~  openwatersizem2, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR13 <- glm(richness ~  conductivity, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR6 <- glm(richness ~  pH+elevation+fishpresence+lenticlotic+openwatersizem2+averagewatertemp, data= dataB, family = poisson(link="log"), offset(areasampled)) #no
 modBR7<-glm(richness ~ elevation + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 modBR8<-glm(richness ~ pH +fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
@@ -185,21 +186,23 @@ modBR9 <-glm(richness ~ pH +openwatersizem2, data= dataB, family = poisson(link=
 modBR10 <- glm(richness ~1, family=poisson(link="log"), data= dataB, offset(areasampled))
 modBR11 <- glm(richness ~averagewatertemp, family=poisson(link="log"), data= dataB, offset(areasampled))
 modBR12 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
-modBR14 <-glm(richness ~ pH +elevation, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR14 <-glm(richness ~ pH +lenticlotic, data= dataB, family = poisson(link="log"), offset(areasampled))
+modBR15 <-glm(richness ~ pH +lenticlotic + fishpresence, data= dataB, family = poisson(link="log"), offset(areasampled))
 
 modL1 <- glm(larvaldensity ~ chirodensity, data = dataB)
 modL2 <-glm(larvaldensity ~ otherinvertsdensity, data = dataB)
 modL3 <-glm(larvaldensity ~ darnerdensity , data = dataB)
 
 # make list of models
-modelsB <- list(modB7, modB8, modB9, modB10, modB12, modB14)
+modelsB <- list(modB7, modB8, modB9, modB10, modB12, modB14, modB15)
 # names of models
 mod_namesB <- c("elevation-fish",
 "pH-fish",
 "ph-openwater",
 "y=1",
 "ph-elevation",
-"ph-lenlot")
+"ph-lenlot",
+"ph-len-lot-fish")
 # makde AIC table
 aictab(cand.set = modelsB, modnames = mod_namesB)
 
@@ -229,14 +232,15 @@ rsq(modB2,adj=FALSE,type=c('v','kl','sse','lr','n'),data=dataB)
 
 
 # make list of models
-modelsBR <- list(modBR7, modBR8,modBR9, modBR10, modBR12, modBR14)
+modelsBR <- list(modBR7, modBR8,modBR9, modBR10, modBR12, modBR14, modBR15)
 # names of models
 mod_namesBR <- c("elevation-fish",
 "pH-fish",
 "pH-openwater",
 "y=1",
 "ph-elevation",
-"ph-lenlot")
+"ph-lenlot",
+"ph-lenlot-fish")
 # makde AIC table
 aictab(cand.set = modelsBR, modnames = mod_namesBR)
 
